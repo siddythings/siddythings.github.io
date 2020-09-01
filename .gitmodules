@@ -1,0 +1,6 @@
+[submodule "siddythings.github.io"]
+	path = siddythings.github.io
+	url = https://github.com/siddythings/siddythings.github.io
+[submodule " public"]
+	path = " public"
+	url = https://github.com/siddythings/siddythings.github.io

@@ -2,5 +2,5 @@
 	path = themes/hugo-notepadium
 	url = https://github.com/cntrump/hugo-notepadium.git
 [submodule "public"]
-	path = "public"
-	url = git://github.com/siddythings/siddythings.github.io
+	path = public
+	url = https://github.com/siddythings/siddythings.github.io.git

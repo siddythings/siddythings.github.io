@@ -5,7 +5,8 @@ install:
 
 script:
   - hugo
-
+language: 
+  - go
 deploy:
   - provider: script
     script: ./deploy.sh

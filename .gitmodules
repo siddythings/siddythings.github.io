@@ -1,6 +1,6 @@
-[submodule "siddythings.github.io"]
-	path = siddythings.github.io
-	url = https://github.com/siddythings/siddythings.github.io
-[submodule " public"]
-	path = " public"
-	url = https://github.com/siddythings/siddythings.github.io
+[submodule "themes/hugo-notepadium"]
+	path = themes/hugo-notepadium
+	url = https://github.com/cntrump/hugo-notepadium.git
+[submodule "public"]
+	path = "public"
+	url = git://github.com/siddythings/siddythings.github.io

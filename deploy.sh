@@ -11,8 +11,8 @@ then
     echo $GITHUB_AUTH_SECRET > ~/.git-credentials
 
     git config credential.helper store
-    git config user.email "username-blog-bot@users.noreply.github.com"
-    git config user.name "username-blog-bot"
+    git config user.email "codewithsidy@gmail.com"
+    git config user.name "siddythings-bot"
 fi
 
 git add .

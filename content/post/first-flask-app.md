@@ -1,5 +1,5 @@
 +++
-author = "Hugo Authors"
+author = "Sidhart"
 title = "Your First Flask Applaction | Ep. 01"
 date = "2020-09-02"
 description = "In first episode of learing we are trying to create and run very first Flask Applaction"
@@ -177,4 +177,10 @@ deactivate
 
 ### Wrapping Up
 
-You now know how to  create and run a basic flask application and how to setup environment for your application
+You now know how to  create and run a basic flask application and how to setup 
+
+environment for your application
+
+
+##### If you stuck someware checkout my code
+[Github](https://github.com/Apex1000/)

@@ -7,10 +7,30 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>©2020 siddythings.</copyright>
-    <lastBuildDate>Wed, 02 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 03 Sep 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Flask application structure | Ep. 02</title>
+      <link>/post/flask-application-structure/</link>
+      <pubDate>Thu, 03 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/flask-application-structure/</guid>
+      <description>&lt;p&gt;This part is about how to structure your application and create new routes. You&amp;rsquo;ll learn about the different structure of your application.&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Top Interview Questions</title>
+      <link>/post/top-interview-questions/</link>
+      <pubDate>Thu, 03 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/top-interview-questions/</guid>
+      <description>&lt;p&gt;Hii, I know your preparing for your interview, So here I m to help you to list down some of the most common questions asked in the interview.&lt;/p&gt;</description>
+      
+    </item>
     
     <item>
       <title>Your First Flask Applaction | Ep. 01</title>

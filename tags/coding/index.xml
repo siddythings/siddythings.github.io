@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>coding on Siddythings</title>
+    <link>/tags/coding/</link>
+    <description>Recent content in coding on Siddythings</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>©2020 siddythings.</copyright>
+    <lastBuildDate>Thu, 03 Sep 2020 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="/tags/coding/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Top Interview Questions</title>
+      <link>/post/top-interview-questions/</link>
+      <pubDate>Thu, 03 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/top-interview-questions/</guid>
+      <description>&lt;p&gt;Hii, I know your preparing for your interview, So here I m to help you to list down some of the most common questions asked in the interview.&lt;/p&gt;</description>
+      
+    </item>
+    
+  </channel>
+</rss>

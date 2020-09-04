@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Flask application structure | Ep. 02&nbsp;&ndash;&nbsp;Siddythings</title><link rel="stylesheet" href="/css/core.min.35c2fe648c6da825f8b00570c3daac0f128c5c86ec631edcf2c847afb817ea48b4772d6fb7c02379afbaa728c401e788.css" integrity="sha384-NcL&#43;ZIxtqCX4sAVww9qsDxKMXIbsYx7c8shHr7gX6ki0dy1vt8Ajea&#43;6pyjEAeeI"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Flask application structure | Ep. 02" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Siddythings</span></a></span>
+        <span class="header right-side"><div class="nav wrap">
+    <nav class="nav">
+        <a class="nav item" href="/"><span class="iconfont icon-user"></span>&nbsp;Posts</a><a class="nav item " href="/categories/">Categories</a><a class="nav item" href="/tags/"><i data-icon="&#x21dd;"></i> Tags</a><a class="nav item" href="/about/"><span class="iconfont icon-user"></span>&nbsp;About</a>
+        <a class="nav item" href="https://github.com/apex1000" target="_blank"><span
+                class="iconfont icon-github"></span>&nbsp;Github</a>
+    </nav>
+</div></span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Flask application structure | Ep. 02</h1><p class="article date">September 3</p></section><article class="article markdown-body"><p>This part is about how to structure your application and create new routes. You&rsquo;ll learn about the different structure of your application.</p>
+<p>Flask is one of the most flexible frameworks unlike any other MVT(e.g. Django).</p>
+<p>So it&rsquo;s very important, To structure your application.
+Because when you are dealing with multiple features in an application then structure will very helpful.
+There are many ways to set up your application structure. This pattern I&rsquo;ve been using from the last couple of years. So it&rsquo;s very easy to understand and work with.</p>
+<h3 id="your-application-as-a-package">Your application as a package</h3>
+<p>I&rsquo;m sure you are well aware of python packages. So by far, the most popular way of structure your application is a package method, where you can define your application as a package and you can import it! Just like any other python package.</p>
+<p>Let&rsquo;s jump into code!</p>
+<p>So, Let&rsquo;s look at how our new structure looks like.</p>
+<pre><code>.
+├── application
+│   ├── __init__.py
+│   └── views.py
+├── env
+├── requirements.txt
+└── wsgi.py
+</code></pre><h3 id="step-by-step-project-structure">Step-by-step project structure.</h3>
+<p>Go inside your folder and remove the previous files you create in the last series.</p>
+<p>Tip: Don&rsquo;t delete the environment folder env you need that to activate your environment in this series also.</p>
+<ul>
+<li>Step 1: Create a file wsgi.py</li>
+<li>Step 2: Create a folder application</li>
+<li>Step 3: Create <code>__init__.py</code> and views.py inside your application folder.</li>
+</ul>
+<p>Done!</p>
+<p>Don&rsquo;t worry about the requrements.txt file.</p>
+<p>Now, Open your favorite IDE.</p>
+<p>Open <code>__init__.py</code> file
+<code>~/&lt;DIR&gt;/application/__init__.py</code></p>
+<pre><code>from flask import Flask
+app = Flask(__name__)
+from application import views
+</code></pre><p>You&rsquo;re familiar with the first two lines. However, you&rsquo;ll think about the third line.</p>
+<p>Think like <code>__init__.py</code> file as a constructor that pull all the part of the application and build it together.
+And then tells Python to treat it as a package!</p>
+<p>Now let&rsquo;s add some views.</p>
+<p>Open <code>views.py</code> file
+<code>~/&lt;DIR&gt;/application/views.py</code></p>
+<pre><code>from application import app
+@app.route('/')
+def index():
+    return &quot;Index Page&quot;
+
+@app.route('/about')
+def about():
+    return &quot;About Page&quot;
+
+@app.route('/blog')
+def blog():
+    return &quot;Blog Page&quot;
+</code></pre><p>Same as our first app, we&rsquo;re creating some routes using the <code>@app.route</code> decorator and passing URL.
+The only difference is from the application import app.
+Actually, we&rsquo;re simply importing app variable from <code>__init__.py</code> file</p>
+<p>Open <code>wsgi.py</code> file
+<code>~/&lt;DIR&gt;/wsgi.py</code></p>
+<pre><code>from application import app
+if __name__ == '__main__':
+	app.run()
+</code></pre><p>Same as <code>views.py</code>  file we are importing application (python treats as a package so we can import it.)
+And we are calling the <code>app.run()</code> method, just like our first app.</p>
+<p>Now, You see everything is the same as our first app but now everything is in a different file.</p>
+<h3 id="flask-environment-variable">Flask environment variable</h3>
+<p>If you have deactivated your project environment the activate it
+Hit the following command from your parent folder.
+<code>source env/bin/activate </code></p>
+<p>Same as in the first app Hit :</p>
+<pre><code>export FLASK_APP=wsgi.py
+export FLASK_ENV=development
+</code></pre><p>Running your app</p>
+<p>Run your application with the following command.</p>
+<pre><code>flask run
+</code></pre><p>You&rsquo;ll see the following message, just like this</p>
+<pre><code>* Serving Flask app &quot;run.py&quot; (lazy loading)
+ * Environment: development
+ * Debug mode: on
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 137-205-426
+</code></pre><p>Now Open a new tab in the browser</p>
+<p>Hit:- <a href="http://127.0.0.1:5000/"target="_blank">http://127.0.0.1:5000/</a></p>
+<p>You&rsquo;ll see &ldquo;Index Page&rdquo;.</p>
+<p>Now Hit:- <a href="http://127.0.0.1:5000/about"target="_blank">http://127.0.0.1:5000/about</a></p>
+<p>You&rsquo;ll see &ldquo;About Page&rdquo;</p>
+<p>Now Hit:- <a href="http://127.0.0.1:5000/blog"target="_blank">http://127.0.0.1:5000/blog</a></p>
+<p>You&rsquo;ll see &ldquo;Blog Page&rdquo;</p>
+<p>You see we just create three different routes.</p>
+<p>So, let&rsquo;s do a level-up</p>
+<p>Create a file <code>admin_views.py</code> inside your application folder</p>
+<p>This file contains all the routes of admin Handel.</p>
+<pre><code>from application import app
+
+@app.route('/admin/dashboard')
+def admin():
+    return &quot;Welcome Admin&quot;
+</code></pre><p>Now you created all the admin routes but your application doesn&rsquo;t know about it because you haven&rsquo;t added to your package.</p>
+<p>Open <code>__init__.py</code> file and add from application import admin_views
+at the end of your file</p>
+<pre><code>from flask import Flask
+app = Flask(__name__)
+from application import views
+from application import admin_views
+</code></pre><p>Save everything and run the application.</p>
+<p>Now Hit: <a href="http://127.0.0.1:5000/admin/bashboard"target="_blank">http://127.0.0.1:5000/admin/bashboard</a></p>
+<p>You&rsquo;ll see &ldquo;Welcome Admin&rdquo;
+Hit <code>Ctrl+C</code> to close the application.</p>
+<p>Requirements
+From the parent folder run the following command:</p>
+<pre><code>pip freeze &gt; requirements.txt
+</code></pre><p>This command creates a file name requirements.txt and stores every package you install in your environment.</p>
+<p>when you open the file you&rsquo;ll see something like this:-</p>
+<pre><code>click==7.1.2
+Flask==1.1.2
+itsdangerous==1.1.0
+Jinja2==2.11.2
+MarkupSafe==1.1.1
+pkg-resources==0.0.0
+Werkzeug==1.0.1
+</code></pre><p>It same as when you hit the pip list. Just the difference is this will create a file in your application and this will help you at the time of hosting your application.</p>
+<p>Tip - To install packages from a requirements.txt file, run <code>pip install -r requirements.txt</code></p>
+<h3 id="wrapping-up">Wrapping Up</h3>
+<p>At the end you file structure will look like this.</p>
+<pre><code>.
+├── application
+│   ├── __init__.py
+│   ├── admin_views.py
+│   └── views.py
+├── env
+├── requirements.txt
+└── wsgi.py
+</code></pre><h5 id="if-you-stuck-someware-checkout-my-code">If you stuck someware checkout my code</h5>
+<p><a href="https://github.com/Apex1000/flask-blog"target="_blank">Github</a></p></article><section class="article labels"><a class="category" href=/categories/flask/>Flask</a><a class="category" href=/categories/flask-beginner/>Flask Beginner</a><a class="tag" href=/tags/python/>python</a><a class="tag" href=/tags/flask/>Flask</a><a class="tag" href=/tags/web-development/>web development</a></section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/top-interview-questions/"><span class="iconfont icon-article"></span>Top Interview Questions</a></p></section></div></section><section id="footer"><div style="display:flex; flex-direction:row; flex-wrap:wrap; justify-content:center;">
+    <p style=" flex-shrink: 0;">©2020 siddythings.</p>
+</div></section></body>
+
+</html>

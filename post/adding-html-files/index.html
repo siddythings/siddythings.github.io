@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Adding HTML files | Ep. 03&nbsp;&ndash;&nbsp;Siddythings</title><link rel="stylesheet" href="/css/core.min.35c2fe648c6da825f8b00570c3daac0f128c5c86ec631edcf2c847afb817ea48b4772d6fb7c02379afbaa728c401e788.css" integrity="sha384-NcL&#43;ZIxtqCX4sAVww9qsDxKMXIbsYx7c8shHr7gX6ki0dy1vt8Ajea&#43;6pyjEAeeI"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Adding HTML files | Ep. 03" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Siddythings</span></a></span>
+        <span class="header right-side"><div class="nav wrap">
+    <nav class="nav">
+        <a class="nav item" href="/"><span class="iconfont icon-user"></span>&nbsp;Posts</a><a class="nav item " href="/categories/">Categories</a><a class="nav item" href="/tags/"><i data-icon="&#x21dd;"></i> Tags</a><a class="nav item" href="/about/"><span class="iconfont icon-user"></span>&nbsp;About</a>
+        <a class="nav item" href="https://github.com/apex1000" target="_blank"><span
+                class="iconfont icon-github"></span>&nbsp;Github</a>
+    </nav>
+</div></span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Adding HTML files | Ep. 03</h1><p class="article date">September 4</p></section><article class="article markdown-body"><p>Hello Guys
+in this part, we are going to bind our application with an HTML page.</p>
+<p>Flask provides very easy way work with static files(e.g HTML,CSS,JS).</p>
+<h3 id="application-setup">Application Setup</h3>
+<p>Just open the same folder we created in the last series. Your application looks something like this.</p>
+<pre><code>.
+├── application
+│   ├── __init__.py
+│   ├── admin_views.py
+│   └── views.py
+├── requirements.txt
+└── wsgi.py
+</code></pre><h4 id="templates-folder">Templates Folder</h4>
+<p>Flask provides an easy way to store all your HTML files in a single place.</p>
+<ul>
+<li>Step 1: Create a <code>templates</code> folder inside your application folder.</li>
+<li>Step 2: Create an <code>index.html</code> file inside that <code>templates folder</code>.</li>
+</ul>
+<p>Open <code>index.html</code> file</p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;en&#34;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;UTF-8&#34;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;viewport&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;width=device-width, initial-scale=1.0&#34;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&#34;X-UA-Compatible&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;ie=edge&#34;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Index<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;color: blue&#34;</span><span class="p">&gt;</span>Index<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Hello world from HTML file.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div><p>Now your project structure looks like this.</p>
+<pre><code>.
+├── application
+│   ├── __init__.py
+│   ├── admin_views.py
+│   ├── templates
+│   │   └── index.html
+│   └── views.py
+├── requirements.txt
+└── wsgi.py
+</code></pre><p>Binding templates to views.</p>
+<p>Open <code>views.py</code> file</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">render_template</span>
+<span class="kn">from</span> <span class="nn">application</span> <span class="kn">import</span> <span class="n">app</span>
+<span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&#34;index.html&#34;</span><span class="p">)</span>
+</code></pre></div><p>You&rsquo;ve noticed in this file we added two lines
+<code>from flask import render_template</code> is used to importing <code>render_template</code> which help&rsquo;s in rendering the HTML file.</p>
+<p>And <code>return render_template(&quot;index.html&quot;)</code> this will look in the templates folder and render the HTML file.</p>
+<p>Save it.!</p>
+<h3 id="lunch-application">Lunch application</h3>
+<p>Hit the following command from your parent folder.</p>
+<p><code>flask run </code></p>
+<p>Go to <a href="http://127.0.0.1:5000/"target="_blank">http://127.0.0.1:5000/</a></p>
+<p>Now you&rsquo;ll see your HTML file.</p>
+<h3 id="leveling-up">Leveling Up.</h3>
+<ul>
+<li>Create HTML files for about and blog routes.</li>
+<li>Create HTML files for admin dashboard routes.</li>
+</ul>
+<p><code>Tip:-</code> Always make a separate folder every new feature, This will help to make your project structure clean.</p>
+<p>After this, your project structure looks like this.</p>
+<pre><code>.
+├── application
+│   ├── __init__.py
+│   ├── admin_views.py
+│   ├── templates
+│   │   ├── admin
+│   │   │   └── dashboard.html
+│   │   └── public
+│   │       └── index.html
+│   └── views.py
+├── requirements.txt
+└── wsgi.py
+</code></pre><p>While rendering HTML file just add the folder name.
+<code>eg.  return render_template(&quot;public/index.html&quot;)</code></p>
+<h3 id="wrapping-up">Wrapping up</h3>
+<p>Any application can be easy as well as complex.</p>
+<p>You can simply put all your views in a single folder and you can also place in a different folder is up to you.</p>
+<p>In the next series, we are going to look at static files (e.g., CSS, JS, Images).</p>
+<h5 id="if-you-stuck-someware-checkout-my-code">If you stuck someware checkout my code</h5>
+<p><a href="https://github.com/Apex1000/flask-blog"target="_blank">Github</a></p></article><section class="article labels"><a class="category" href=/categories/flask/>Flask</a><a class="category" href=/categories/flask-beginner/>Flask Beginner</a><a class="tag" href=/tags/python/>python</a><a class="tag" href=/tags/flask/>Flask</a><a class="tag" href=/tags/web-development/>web development</a></section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/flask-application-structure/"><span class="iconfont icon-article"></span>Flask application structure | Ep. 02</a></p></section></div></section><section id="footer"><div style="display:flex; flex-direction:row; flex-wrap:wrap; justify-content:center;">
+    <p style=" flex-shrink: 0;">©2020 siddythings.</p>
+</div></section></body>
+
+</html>

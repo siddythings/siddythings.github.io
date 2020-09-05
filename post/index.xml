@@ -24,6 +24,17 @@ in this part, we are going to bind our application with an HTML page.&lt;/p&gt;<
     </item>
     
     <item>
+      <title>Adding static files Flask | Ep. 04</title>
+      <link>/post/adding-static-folder-flask/</link>
+      <pubDate>Fri, 04 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/adding-static-folder-flask/</guid>
+      <description>&lt;p&gt;Hii,
+In this segment, we are learning about how to add &lt;code&gt;stylesheets&lt;/code&gt;, &lt;code&gt;javascript&lt;/code&gt;, and &lt;code&gt;images&lt;/code&gt; to our application.&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
       <title>Flask application structure | Ep. 02</title>
       <link>/post/flask-application-structure/</link>
       <pubDate>Thu, 03 Sep 2020 00:00:00 +0000</pubDate>

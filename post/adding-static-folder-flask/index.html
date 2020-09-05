@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Adding static files Flask | Ep. 04&nbsp;&ndash;&nbsp;Siddythings</title><link rel="stylesheet" href="/css/core.min.35c2fe648c6da825f8b00570c3daac0f128c5c86ec631edcf2c847afb817ea48b4772d6fb7c02379afbaa728c401e788.css" integrity="sha384-NcL&#43;ZIxtqCX4sAVww9qsDxKMXIbsYx7c8shHr7gX6ki0dy1vt8Ajea&#43;6pyjEAeeI"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Adding static files Flask | Ep. 04" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Siddythings</span></a></span>
+        <span class="header right-side"><div class="nav wrap">
+    <nav class="nav">
+        <a class="nav item" href="/"><span class="iconfont icon-user"></span>&nbsp;Posts</a><a class="nav item " href="/categories/">Categories</a><a class="nav item" href="/tags/"><i data-icon="&#x21dd;"></i> Tags</a><a class="nav item" href="/about/"><span class="iconfont icon-user"></span>&nbsp;About</a>
+        <a class="nav item" href="https://github.com/apex1000" target="_blank"><span
+                class="iconfont icon-github"></span>&nbsp;Github</a>
+    </nav>
+</div></span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Adding static files Flask | Ep. 04</h1><p class="article date">September 4</p></section><article class="article markdown-body"><p>Hii,
+In this segment, we are learning about how to add <code>stylesheets</code>, <code>javascript</code>, and <code>images</code> to our application.</p>
+<p>Flask provides a few ways to work with static files.</p>
+<h3 id="creating-stylesheets">Creating stylesheets</h3>
+<p>If you how to work with the stylesheets and how to add in the stylesheets to your HTML pages then its easy for you.</p>
+<p>Flask requires a <code>static</code> folder the same as the <code>templates</code> folder in the last segment.</p>
+<h4 id="creating-a-static-folder">Creating a static folder</h4>
+<p>Go inside our <code>application</code> folder.</p>
+<ul>
+<li>Step 1: Create a static folder.</li>
+<li>Step 2: Create a CSS folder</li>
+<li>Step 3: Create a style.css inside that CSS folder.</li>
+</ul>
+<p>Now, Our project structure something that looks like this.</p>
+<pre><code>. 
+├── application
+│   ├── __init__.py
+│   ├── admin_views.py
+│   ├── static
+│   │   └── css
+│   │       └── style.css
+│   ├── templates
+│   │   ├── admin
+│   │   │   └── dashboard.html
+│   │   └── public
+│   │       └── index.html
+│   └── views.py
+├── requirements.txt
+└── wsgi.py
+</code></pre><p>Open <code>style.css</code> file</p>
+<p><code>&lt;root&gt;/application/static/css/style.css</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html">body {
+  background-color: #666666
+}
+</code></pre></div><p>Save it.</p>
+<p>Adding stylesheets to <code>HTML</code>.</p>
+<p>Like typically you provide a relative path to your stylesheet in the <code>&lt;head&gt;</code></p>
+<p><code>e.g., &lt;link rel=&quot;stylesheet&quot; href=&quot;path/to/your/stylesheet.css&quot;&gt;</code></p>
+<h4 id="linking-stylesheets-in-flask">Linking stylesheets in Flask</h4>
+<p>Flask has a function called url_for which can be used in our HTML to provide a path to any static file we want to fetch.</p>
+<p>Like.,</p>
+<p><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;{{  url_for('static',filename='css/style.css'}}&quot;&gt;</code></p>
+<p>Notice the double curly braces <code>{{ }}</code>
+These double curly braces are part of the Jinja templating engine that Flask uses to render the HTML files.</p>
+<p>Don&rsquo;t worry about <code>Jinja templating</code> you will learn in the upcoming segment in this series.</p>
+<p>In this case <code>{{ url_for('static', filename='css/style.css') }}</code>
+Jinja will replace the path with the CSS file path.
+Flask will render the stylesheet we just created at <code>static/css/style.css</code></p>
+<p>Save your HTML file.</p>
+<h4 id="javascript-files">Javascript Files</h4>
+<p>Now we are going to create a Javascript folder that stores all the js files.</p>
+<ul>
+<li>Step 1: Create a folder js inside your static folder.</li>
+<li>Step 2: Create a file name app.js inside the js folder.</li>
+</ul>
+<p>Now our application structure looks like this</p>
+<pre><code>. 
+├── application
+│   ├── __init__.py
+│   ├── admin_views.py
+│   ├── static
+│   │   ├── css
+│   │   │   └── style.css
+│   │   └── js
+│   │       └── app.js
+│   ├── templates
+│   │   ├── admin
+│   │   │   └── dashboard.html
+│   │   └── public
+│   │       └── index.html
+│   └── views.py
+├── requirements.txt
+└── wsgi.py
+</code></pre><p>Open <code>app.js</code> file</p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html">console.log(&#34;Hello Flask app from Javascript?&#34;);
+</code></pre></div><p>Now link our <code>app.js</code> to Html file.
+Same as we did it in the CSS segment.</p>
+<p>Open <code>index.html</code> file and add the bellow line.</p>
+<pre><code>&lt;script src=&quot;{{ url_for('static', filename='js/app.js') }}&quot;&gt;&lt;/script&gt;
+</code></pre><p>Your <code>index.html</code> file looks like this</p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;en&#34;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;UTF-8&#34;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;viewport&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;width=device-width, initial-scale=1.0&#34;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&#34;X-UA-Compatible&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;ie=edge&#34;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#34;stylesheet&#34;</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;{{ url_for(&#39;static&#39;, filename=&#39;css/style.css&#39;) }}&#34;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Index<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;color: blue&#34;</span><span class="p">&gt;</span>Index<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Hello Flask<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;{{ url_for(&#39;static&#39;, filename=&#39;js/app.js&#39;) }}&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div><h4 id="serving-images">Serving Images</h4>
+<p>Same as in the last segment we need to add a folder for images.
+So, let&rsquo;s do it.</p>
+<ul>
+<li>Step 1: Create folder images inside your static folder.</li>
+<li>Step 2: Store some images in it.</li>
+</ul>
+<p>Now your folder structure looks like this.</p>
+<pre><code>.
+├── application
+│   ├── __init__.py
+│   ├── admin_views.py
+│   ├── static
+│   │   ├── css
+│   │   │   └── style.css
+│   │   ├── images
+│   │   │   └── img.png
+│   │   └── js
+│   │       └── app.js
+│   ├── templates
+│   │   ├── admin
+│   │   │   └── dashboard.html
+│   │   └── public
+│   │       └── index.html
+│   └── views.py
+├── requirements.txt
+└── wsgi.py
+</code></pre><p>Now add the image to our <code>index.html</code> file.</p>
+<p>Open <code>index.html</code></p>
+<p>as same as we did for CSS and JS we do the same for Images also. we are using url_for for adding the images
+Add the following line</p>
+<p><code>&lt;img src=&quot;{{ url_for('static', filename='images/img.png') }}&quot;&gt;</code></p>
+<p>Now our <code>index.html</code> file will look like this.</p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;en&#34;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;UTF-8&#34;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;viewport&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;width=device-width, initial-scale=1.0&#34;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&#34;X-UA-Compatible&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;ie=edge&#34;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#34;stylesheet&#34;</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;{{ url_for(&#39;static&#39;, filename=&#39;css/style.css&#39;) }}&#34;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Index<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;color: blue&#34;</span><span class="p">&gt;</span>Index<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Hello Flask<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;{{ url_for(&#39;static&#39;, filename=&#39;images/img.png&#39;) }}&#34;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;{{ url_for(&#39;static&#39;, filename=&#39;js/app.js&#39;) }}&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div><p>So Save all the file and Lunch the application</p>
+<pre><code>flask run
+</code></pre><h3 id="wrapping-up">Wrapping Up</h3>
+<p>In the segment, we have learned a lot of things adding <code>CSS</code>, <code>JS</code>, and <code>Images</code>.
+Knowing some <code>Jinja</code> tools.</p>
+<p>Now I think you can make a small static website in Flask. So what you&rsquo;re waiting for go for it. Make your website.</p>
+<p>In the upcoming segments, we are gonna learn about Jinja templating engine and pushing ourselves to communicate with the flask application to HTML views.</p>
+<h5 id="if-you-stuck-someware-checkout-my-code">If you stuck someware checkout my code</h5>
+<p><a href="https://github.com/Apex1000/flask-blog"target="_blank">Github</a></p></article><section class="article labels"><a class="category" href=/categories/flask/>Flask</a><a class="category" href=/categories/flask-beginner/>Flask Beginner</a><a class="tag" href=/tags/python/>python</a><a class="tag" href=/tags/flask/>Flask</a><a class="tag" href=/tags/web-development/>web development</a></section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/adding-html-files/"><span class="iconfont icon-article"></span>Adding HTML files | Ep. 03</a></p><p><a class="link" href="/post/flask-application-structure/"><span class="iconfont icon-article"></span>Flask application structure | Ep. 02</a></p></section></div></section><section id="footer"><div style="display:flex; flex-direction:row; flex-wrap:wrap; justify-content:center;">
+    <p style=" flex-shrink: 0;">©2020 siddythings.</p>
+</div></section></body>
+
+</html>

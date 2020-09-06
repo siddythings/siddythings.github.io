@@ -24,10 +24,11 @@ unsafe = true  # enable raw HTML in Markdown
 [params]
 style = "auto"  # default: auto. light: light theme, dark: dark theme, auto: based on system.
 dateFormat = "January 2"  # if unset, default is "2006-01-02"
-logo = ""  # if you have a logo png
+logo = "/img/logo.png"  # if you have a logo png
 license = ""  # CC License
 fullRss = false # Puts entire HTML post into rss 'description' tag. If unset, default is false.
 description = "Hii, Let's talk about Python Developement!"
+favicon = "/img/favicon.ico"
 
 [params.comments]
 enable = true  # En/Disable comments globally, default: false. You can always enable comments on per page.

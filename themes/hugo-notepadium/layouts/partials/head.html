@@ -1,15 +1,22 @@
 <meta charset="utf-8">
 {{- hugo.Generator -}}
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
 {{ if .Description }}
-<meta name="description" content="{{ .Description }}">
+<meta name="twitter:description" content="{{ .Description }}">
 {{ else if .IsPage }}
-<meta name="description" content="{{ .Summary | plainify }}">
+<meta name="twitter:description" content="{{ .Summary | plainify }}">
 {{ else }}
-<meta name="description" content="{{ $.Site.Params.description }}">
+<meta name="twitter:description" content="{{ $.Site.Params.description }}">
 {{ end }}
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:domain" content="siddythings.github.io" />
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark">
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="siddythings" />
+
+<link rel="shortcut icon" href="{{- $.Site.Params.favicon | relURL -}}">
 
 {{- define "title" -}}
 {{- $title := .Title -}}
@@ -29,5 +36,7 @@
 {{- partial "twitter-card.html" . -}}
 {{- if .Params.Robots -}}
 <meta name="robots" content="{{ .Params.robots }}" />
+
+
 {{- end -}}
 {{- partial "head-extra.html" . -}}

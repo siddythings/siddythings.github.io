@@ -5,7 +5,7 @@
     <link>/tags/flask/</link>
     <description>Recent content in Flask on Siddythings</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
+    <language>en-us</language>
     <copyright>©2020 siddythings.</copyright>
     <lastBuildDate>Fri, 04 Sep 2020 00:00:00 +0000</lastBuildDate>
     
@@ -31,6 +31,17 @@ in this part, we are going to bind our application with an HTML page.&lt;/p&gt;<
       <guid>/post/adding-static-folder-flask/</guid>
       <description>&lt;p&gt;Hii,
 In this segment, we are learning about how to add &lt;code&gt;stylesheets&lt;/code&gt;, &lt;code&gt;javascript&lt;/code&gt;, and &lt;code&gt;images&lt;/code&gt; to our application.&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Jinja Templating Flask | Ep. 05</title>
+      <link>/post/jinja-template-inheritance/</link>
+      <pubDate>Fri, 04 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/jinja-template-inheritance/</guid>
+      <description>&lt;p&gt;Hello,
+In the last segment, we talk a bit about &lt;code&gt;Jinja templating&lt;/code&gt;. So in this segment, we are going to learn about How to work with &lt;code&gt;Jinja templating&lt;/code&gt; engine with Html.&lt;/p&gt;</description>
       
     </item>
     

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+
+<meta name="twitter:description" content="Jinja Templating in Flask">
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:domain" content="siddythings.github.io" />
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="siddythings" />
+
+<link rel="shortcut icon" href="/img/favicon.ico"><title>Jinja Templating Flask | Ep. 05&nbsp;&ndash;&nbsp;Siddythings</title><link rel="stylesheet" href="/css/core.min.35c2fe648c6da825f8b00570c3daac0f128c5c86ec631edcf2c847afb817ea48b4772d6fb7c02379afbaa728c401e788.css" integrity="sha384-NcL&#43;ZIxtqCX4sAVww9qsDxKMXIbsYx7c8shHr7gX6ki0dy1vt8Ajea&#43;6pyjEAeeI"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Jinja Templating Flask | Ep. 05" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><img class="site logo" src="/img/logo.png" alt /><span class="site name">Siddythings</span></a></span>
+        <span class="header right-side"><div class="nav wrap">
+    <nav class="nav">
+        <a class="nav item" href="/"><span class="iconfont icon-user"></span>&nbsp;Posts</a><a class="nav item " href="/categories/">Categories</a><a class="nav item" href="/tags/"><i data-icon="&#x21dd;"></i> Tags</a><a class="nav item" href="/about/"><span class="iconfont icon-user"></span>&nbsp;About</a>
+        <a class="nav item" href="https://github.com/apex1000" target="_blank"><span
+                class="iconfont icon-github"></span>&nbsp;Github</a>
+    </nav>
+</div></span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Jinja Templating Flask | Ep. 05</h1><p class="article date">September 4</p></section><article class="article markdown-body"><p>Hello,
+In the last segment, we talk a bit about <code>Jinja templating</code>. So in this segment, we are going to learn about How to work with <code>Jinja templating</code> engine with Html.</p>
+<p>I assume you are familiar with the concept of <a href="https://en.wikipedia.org/wiki/Inheritance_%28object-oriented_programming%29"target="_blank"><code>Inheritance</code></a>.</p>
+<p>Template inheritance work&rsquo;s also the same. We create a series of <code>base templates</code> and import them into <code>child templets</code>, In the concept of not repeating the same code again and again.</p>
+<h4 id="lets-talk-with-an-example-">Let&rsquo;s talk with an example:-</h4>
+<p>Every website has these components.</p>
+<ul>
+<li>header</li>
+<li>navbar</li>
+<li>main content</li>
+<li>footer</li>
+</ul>
+<p>And if you create 4 pages</p>
+<ul>
+<li>Home page</li>
+<li>About page</li>
+<li>Blog page</li>
+<li>Contact us page</li>
+</ul>
+<p>So, in all these 4 page&rsquo;s only content will differ but the rest of the components will be the same.</p>
+<p>Template inheritance help in writing the clean code.</p>
+<p>Let&rsquo;s get coding!</p>
+<h3 id="creating-base-templates">Creating base templates</h3>
+<p>If you have followed in the last segment then you understand the concept of breaking up our Flask application into sub-directories or separate folder/file structure to maintain good readability of the code.</p>
+<p>So, In this segment, we are creating a file structure for the HTML template</p>
+<p>Let&rsquo;s create folders for HTML.
+Open the templates folder
+<code>&lt;root&gt;/application/templates</code></p>
+<ul>
+<li>Step 1: Go inside the admin folder</li>
+<li>Step 2: Delete All the files we created in the last segment.</li>
+<li>Step 3: Create two folders layout and main inside the admin.</li>
+<li>Step 4: Create base.html, footer.html, and nevbar.html inside the layout folder.</li>
+<li>Step 5: Create index.html inside the main folder.</li>
+</ul>
+<p>Repeat the same for the public folder also.</p>
+<h4 id="folder-tree">Folder tree</h4>
+<p>After that, your structure looks like this.</p>
+<pre><code>.
+├── application
+│   ├── __init__.py
+│   ├── admin_views.py
+│   ├── static
+│   │   ├── css
+│   │   │   └── style.css
+│   │   ├── images
+│   │   │   └── img.jpg
+│   │   └── js
+│   │       └── app.js
+│   ├── templates
+│   │   ├── admin
+│   │   │   └── layout
+│   │   │   │   ├── base.html
+│   │   │   │   ├── footer.html
+│   │   │        └── nevbar.html
+│   │   │   ├──main
+│   │   │       └── index.html
+│   │   └── public
+│   │   │   └── layout
+│   │   │   │   ├── base.html
+│   │   │   │   ├── footer.html
+│   │   │        └── nevbar.html
+│   │   │   ├──main
+│   │   │       └── index.html
+│   └── views.py
+├── requirements.txt
+└── wsgi.py
+</code></pre><p>As you can see we have created the different layout and main folders for public and admin.</p>
+<p>Both the layout and main folder has file so you can custom design for different users.</p>
+<p>In the <code>base.html</code> contents all the <code>stylesheet</code>, <code>js</code>, and all including files.</p>
+<p>Open <code>base.html</code> file</p>
+<p><code>&lt;root&gt;/application/templates/public/layout/base.html</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="cp">&lt;!doctype html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;en&#34;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;utf-8&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;viewport&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;width=device-width, initial-scale=1, shrink-to-fit=no&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;description&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;author&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#34;icon&#34;</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;https://getbootstrap.com/docs/4.0/assets/img/favicons/favicon.ico&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>{{ title }}<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#34;canonical&#34;</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/&#34;</span><span class="p">&gt;</span>
+    <span class="c">&lt;!-- Bootstrap core CSS --&gt;</span>
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css&#34;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#34;stylesheet&#34;</span><span class="p">&gt;</span>
+    <span class="c">&lt;!-- Custom styles for this template --&gt;</span>
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/sticky-footer-navbar.css&#34;</span>
+        <span class="na">rel</span><span class="o">=</span><span class="s">&#34;stylesheet&#34;</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="c">&lt;!-- Begin page content --&gt;</span>
+    {% include &#34;public/layout/navbar.html&#34;%}
+    {% block content %}{% endblock %}
+    {% include &#34;public/layout/footer.html&#34;%}
+    
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://code.jquery.com/jquery-3.2.1.slim.min.js&#34;</span>
+        <span class="na">integrity</span><span class="o">=</span><span class="s">&#34;sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN&#34;</span>
+        <span class="na">crossorigin</span><span class="o">=</span><span class="s">&#34;anonymous&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span><span class="nb">window</span><span class="p">.</span><span class="nx">jQuery</span> <span class="o">||</span> <span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s1">&#39;&lt;script src=&#34;../../assets/js/vendor/jquery-slim.min.js&#34;&gt;&lt;\/script&gt;&#39;</span><span class="p">)&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://getbootstrap.com/docs/4.0/assets/js/vendor/popper.min.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div><p>Notice:-
+<code>{{ title }} </code>: Variable from flask views</p>
+<p><code>{% include &quot;public/layout/navbar.html&quot;%}</code>: inherit nevbar.</p>
+<p><code>{% block content %}{% endblock %}</code>: inherit content from the child templates.</p>
+<p><code>{% include &quot;public/layout/footer.html&quot;%}</code>: inherit footer.</p>
+<h3 id="child-templates">Child templates</h3>
+<p>Open <code>index.html</code> file
+<code>&lt;root&gt;/application/templates/public/main/index.html</code></p>
+<pre><code>{% extends &quot;public/layout/base.html&quot; %}
+{% block content %}
+&lt;main role=&quot;main&quot; class=&quot;container&quot;&gt;
+    &lt;h1 class=&quot;mt-5&quot;&gt;Index page&lt;/h1&gt;
+&lt;/main&gt;
+{% endblock %}
+</code></pre><p>Open <code>views.py</code> files</p>
+<p><code>&lt;root&gt;/application/views.py</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">render_template</span>
+<span class="kn">from</span> <span class="nn">application</span> <span class="kn">import</span> <span class="n">app</span>
+<span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;public/main/index.html&#39;</span><span class="p">,</span>
+                            <span class="n">title</span><span class="o">=</span><span class="s2">&#34;Flask Application&#34;</span><span class="p">)</span>
+</code></pre></div><p><code>Notice</code>:-  sending title from flask to HTML as you saw above.</p>
+<h4 id="assessment">Assessment</h4>
+<ul>
+<li>Make about page, blog page.</li>
+<li>Make the Admin panel.</li>
+</ul>
+<p>Hint :</p>
+<ul>
+<li>Modify about, blog routes and add HTML page for it as same as <code>index.html</code></li>
+<li>Add Admin panel
+<ul>
+<li>add routes in admin_views.py</li>
+<li>add templates in layout and main folder</li>
+</ul>
+</li>
+</ul>
+<h3 id="wrapping-up">Wrapping up</h3>
+<p>Don&rsquo;t worry it&rsquo;s not complicated you just need some time and revision you can do it!</p>
+<h5 id="if-you-stuck-someware-checkout-my-code">If you stuck someware checkout my code</h5>
+<p><a href="https://github.com/Apex1000/flask-blog"target="_blank">Github</a></p></article><section class="article labels"><a class="category" href=/categories/flask/>Flask</a><a class="category" href=/categories/flask-beginner/>Flask Beginner</a><a class="tag" href=/tags/python/>python</a><a class="tag" href=/tags/flask/>Flask</a><a class="tag" href=/tags/web-development/>web development</a></section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/adding-static-folder-flask/"><span class="iconfont icon-article"></span>Adding static files Flask | Ep. 04</a></p><p><a class="link" href="/post/flask-application-structure/"><span class="iconfont icon-article"></span>Flask application structure | Ep. 02</a></p></section></div></section><section id="footer"><div style="display:flex; flex-direction:row; flex-wrap:wrap; justify-content:center;">
+    <p style=" flex-shrink: 0;">©2020 siddythings.</p>
+</div></section></body>
+
+</html>

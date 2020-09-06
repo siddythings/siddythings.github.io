@@ -3,7 +3,7 @@ title = "Siddythings"
 theme = "hugo-notepadium"
 copyright = "©2020 siddythings."
 
-languageCode = "zh-cn"
+languageCode = "en-us"
 hasCJKLanguage = true
 
 enableRobotsTXT = true

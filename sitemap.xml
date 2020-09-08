@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml"><url>
+    <loc>https://siddythings.github.io/categories/</loc><lastmod>2020-09-06T00:00:00+00:00</lastmod></url><url>
+    <loc>https://siddythings.github.io/tags/flask/</loc><lastmod>2020-09-06T00:00:00+00:00</lastmod></url><url>
+    <loc>https://siddythings.github.io/categories/flask/</loc><lastmod>2020-09-06T00:00:00+00:00</lastmod></url><url>
+    <loc>https://siddythings.github.io/categories/flask-beginner/</loc><lastmod>2020-09-06T00:00:00+00:00</lastmod></url><url>
+    <loc>https://siddythings.github.io/post/jinja-templating-part-02/</loc><lastmod>2020-09-06T00:00:00+00:00</lastmod></url><url>
+    <loc>https://siddythings.github.io/post/</loc><lastmod>2020-09-06T00:00:00+00:00</lastmod></url><url>
+    <loc>https://siddythings.github.io/tags/python/</loc><lastmod>2020-09-06T00:00:00+00:00</lastmod></url><url>
+    <loc>https://siddythings.github.io/</loc><lastmod>2020-09-06T00:00:00+00:00</lastmod></url><url>
+    <loc>https://siddythings.github.io/tags/</loc><lastmod>2020-09-06T00:00:00+00:00</lastmod></url><url>
+    <loc>https://siddythings.github.io/tags/web-development/</loc><lastmod>2020-09-06T00:00:00+00:00</lastmod></url><url>
     <loc>https://siddythings.github.io/post/adding-html-files/</loc><lastmod>2020-09-04T00:00:00+00:00</lastmod></url><url>
     <loc>https://siddythings.github.io/post/adding-static-folder-flask/</loc><lastmod>2020-09-04T00:00:00+00:00</lastmod></url><url>
-    <loc>https://siddythings.github.io/categories/</loc><lastmod>2020-09-04T00:00:00+00:00</lastmod></url><url>
-    <loc>https://siddythings.github.io/tags/flask/</loc><lastmod>2020-09-04T00:00:00+00:00</lastmod></url><url>
-    <loc>https://siddythings.github.io/categories/flask/</loc><lastmod>2020-09-04T00:00:00+00:00</lastmod></url><url>
-    <loc>https://siddythings.github.io/categories/flask-beginner/</loc><lastmod>2020-09-04T00:00:00+00:00</lastmod></url><url>
     <loc>https://siddythings.github.io/post/jinja-template-inheritance/</loc><lastmod>2020-09-04T00:00:00+00:00</lastmod></url><url>
-    <loc>https://siddythings.github.io/post/</loc><lastmod>2020-09-04T00:00:00+00:00</lastmod></url><url>
-    <loc>https://siddythings.github.io/tags/python/</loc><lastmod>2020-09-04T00:00:00+00:00</lastmod></url><url>
-    <loc>https://siddythings.github.io/</loc><lastmod>2020-09-04T00:00:00+00:00</lastmod></url><url>
-    <loc>https://siddythings.github.io/tags/</loc><lastmod>2020-09-04T00:00:00+00:00</lastmod></url><url>
-    <loc>https://siddythings.github.io/tags/web-development/</loc><lastmod>2020-09-04T00:00:00+00:00</lastmod></url><url>
     <loc>https://siddythings.github.io/tags/array/</loc><lastmod>2020-09-03T00:00:00+00:00</lastmod></url><url>
     <loc>https://siddythings.github.io/tags/coding/</loc><lastmod>2020-09-03T00:00:00+00:00</lastmod></url><url>
     <loc>https://siddythings.github.io/post/flask-application-structure/</loc><lastmod>2020-09-03T00:00:00+00:00</lastmod></url><url>

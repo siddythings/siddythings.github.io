@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+
+<meta name="twitter:description" content="Jinja Templating in Flask">
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:domain" content="siddythings.github.io" />
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="siddythings" />
+
+<link rel="shortcut icon" href="/img/favicon.ico"><title>Jinja Templating Flask Part-02 | Ep. 06&nbsp;&ndash;&nbsp;Siddythings</title><link rel="stylesheet" href="/css/core.min.35c2fe648c6da825f8b00570c3daac0f128c5c86ec631edcf2c847afb817ea48b4772d6fb7c02379afbaa728c401e788.css" integrity="sha384-NcL&#43;ZIxtqCX4sAVww9qsDxKMXIbsYx7c8shHr7gX6ki0dy1vt8Ajea&#43;6pyjEAeeI"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Jinja Templating Flask Part-02 | Ep. 06" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><img class="site logo" src="/img/logo.png" alt /><span class="site name">Siddythings</span></a></span>
+        <span class="header right-side"><div class="nav wrap">
+    <nav class="nav">
+        <a class="nav item" href="/"><span class="iconfont icon-user"></span>&nbsp;Posts</a><a class="nav item " href="/categories/">Categories</a><a class="nav item" href="/tags/"><i data-icon="&#x21dd;"></i> Tags</a><a class="nav item" href="/about/"><span class="iconfont icon-user"></span>&nbsp;About</a>
+        <a class="nav item" href="https://github.com/apex1000" target="_blank"><span
+                class="iconfont icon-github"></span>&nbsp;Github</a>
+    </nav>
+</div></span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Jinja Templating Flask Part-02 | Ep. 06</h1><p class="article date">September 6</p></section><article class="article markdown-body"><p>Hello,
+This segment is going to a bit more about Jinja templating.
+In the last segment, you have to learn how to create base templates, child templates, and how to extend and include templates.</p>
+<p>But there are lots of things to learn. So let&rsquo;s get started.</p>
+<p>I hope you have done the assessment.</p>
+<p>If not
+Let&rsquo;s create view&rsquo;s</p>
+<p><code>&lt;root&gt;/application/views.py</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/about&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">about</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;public/main/about.html&#39;</span>
+						<span class="n">title</span><span class="o">=</span><span class="s2">&#34;About Page&#34;</span><span class="p">)</span>
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/blog&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">iblog</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;public/main/blog.html&#39;</span><span class="p">,</span>
+					<span class="n">title</span><span class="o">=</span><span class="s2">&#34;Blog Page&#34;</span><span class="p">)</span>
+</code></pre></div><p>Also, sending custom title for the Page Title as objects</p>
+<p><code>&lt;root&gt;/application/templates/public/about.html</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html">{% extends &#34;public/layout/base.html&#34; %}
+{% block content %}
+
+<span class="p">&lt;</span><span class="nt">main</span> <span class="na">role</span><span class="o">=</span><span class="s">&#34;main&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;container&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;mt-5&#34;</span><span class="p">&gt;</span>About page<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+{% endblock %}
+</code></pre></div><p><code>&lt;root&gt;/application/templates/public/blog.html</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html">{% extends &#34;public/layout/base.html&#34; %}
+{% block content %}
+
+<span class="p">&lt;</span><span class="nt">main</span> <span class="na">role</span><span class="o">=</span><span class="s">&#34;main&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;container&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;mt-5&#34;</span><span class="p">&gt;</span>Blog page<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+{% endblock %}
+</code></pre></div><h4 id="so-lets-talk-about-passing-object">So let&rsquo;s talk about passing object</h4>
+<p>As you have seen in the previous segment we are passing objects from views to the <code>HTML page</code>.
+So, there are some rules in <code>Jinja templating</code>.</p>
+<h4 id="single-variable">Single Variable</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="nd">@app.route</span><span class="p">(</span><span class="s2">&#34;/variable&#34;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">variable</span><span class="p">():</span>
+    <span class="n">my_name</span> <span class="o">=</span> <span class="s2">&#34;xyz&#34;</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&#34;public/main/variable.html&#34;</span><span class="p">,</span>
+						<span class="n">name</span><span class="o">=</span><span class="n">my_name</span><span class="p">)</span>
+</code></pre></div><p>In the above case, my_name contains the value, and we passing that value to the name object. Which can be accessed by the HTML page with name object</p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html">{% extends &#34;public/layout/base.html&#34; %}
+{% block content %}
+
+<span class="p">&lt;</span><span class="nt">main</span> <span class="na">role</span><span class="o">=</span><span class="s">&#34;main&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;container&#34;</span><span class="p">&gt;</span>
+   <span class="p">&lt;</span><span class="nt">h3</span> <span class="p">&gt;</span> Hello {{ name }} <span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+{% endblock %}
+</code></pre></div><p>As you see in the above, for example, we are excessing that object by there name.</p>
+<p>Note:- Always use <code>{{ &lt;object name&gt; }}</code> like this.</p>
+<p>What happens if we pass an array as an object.</p>
+<h4 id="list-variable">List variable</h4>
+<p>Then we simply use a loop to print all there value.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="nd">@app.route</span><span class="p">(</span><span class="s2">&#34;/variable&#34;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">variable</span><span class="p">():</span>
+    <span class="n">my_name</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;Tom&#34;</span><span class="p">,</span><span class="s2">&#34;Jarry&#34;</span><span class="p">,</span><span class="s2">&#34;Oggy&#34;</span><span class="p">,</span><span class="s2">&#34;cockroaches&#34;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&#34;public/main/variable.html&#34;</span><span class="p">,</span>
+				<span class="n">names</span><span class="o">=</span><span class="n">my_name</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html">{% extends &#34;public/layout/base.html&#34; %}
+{% block content %}
+
+<span class="p">&lt;</span><span class="nt">main</span> <span class="na">role</span><span class="o">=</span><span class="s">&#34;main&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;container&#34;</span><span class="p">&gt;</span>
+{% for name in names %}   
+<span class="p">&lt;</span><span class="nt">h3</span> <span class="p">&gt;</span> Hello {{ name }} <span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+{% endfor %}
+<span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+{% endblock %}
+</code></pre></div><p>As you can see we are using for loop to iterate in our names array. And also notice the syntax of the for loop we using <code>{% loop index %}</code> and also end <code>{% end loop %}</code>
+it some things like C-lang it has open and close statements</p>
+<h4 id="dictionaries">Dictionaries</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">prise</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&#34;water&#34;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="s2">&#34;colddrink&#34;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+    <span class="s2">&#34;softdrink&#34;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+    <span class="s2">&#34;mango&#34;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="s2">&#34;nuts&#34;</span><span class="p">:</span> <span class="mi">34</span>
+<span class="p">}</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="nd">@app.route</span><span class="p">(</span><span class="s2">&#34;/variable&#34;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">variable</span><span class="p">():</span>
+    <span class="n">prise</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&#34;water&#34;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="s2">&#34;colddrink&#34;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+    <span class="s2">&#34;softdrink&#34;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+    <span class="s2">&#34;mango&#34;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="s2">&#34;nuts&#34;</span><span class="p">:</span> <span class="mi">34</span>
+		<span class="p">}</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&#34;public/main/variable.html&#34;</span><span class="p">,</span>
+				<span class="n">prises</span><span class="o">=</span><span class="n">prise</span><span class="p">)</span>
+</code></pre></div><p>Accessing object by indexes, key, and attributes</p>
+<div class="highlight"><pre class="chroma"><code class="language-h" data-lang="h"><span class="p">{</span><span class="o">%</span> <span class="n">extends</span> <span class="s">&#34;public/layout/base.html&#34;</span> <span class="o">%</span><span class="p">}</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">block</span> <span class="n">content</span> <span class="o">%</span><span class="p">}</span>
+<span class="o">&lt;</span><span class="n">main</span> <span class="n">role</span><span class="o">=</span><span class="s">&#34;main&#34;</span> <span class="n">class</span><span class="o">=</span><span class="s">&#34;container&#34;</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">h3</span> <span class="o">&gt;</span> <span class="n">Hello</span> <span class="p">{{</span> <span class="n">prises</span><span class="p">.</span><span class="n">water</span> <span class="p">}}</span> <span class="o">&lt;/</span><span class="n">h3</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">main</span><span class="o">&gt;</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">endblock</span> <span class="o">%</span><span class="p">}</span>
+</code></pre></div><p>Accesing all objects by loop</p>
+<div class="highlight"><pre class="chroma"><code class="language-h" data-lang="h"><span class="p">{</span><span class="o">%</span> <span class="n">extends</span> <span class="s">&#34;public/layout/base.html&#34;</span> <span class="o">%</span><span class="p">}</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">block</span> <span class="n">content</span> <span class="o">%</span><span class="p">}</span>
+<span class="o">&lt;</span><span class="n">main</span> <span class="n">role</span><span class="o">=</span><span class="s">&#34;main&#34;</span> <span class="n">class</span><span class="o">=</span><span class="s">&#34;container&#34;</span><span class="o">&gt;</span>
+<span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">prise</span> <span class="n">in</span> <span class="n">prises</span><span class="p">.</span><span class="n">items</span><span class="p">()</span> <span class="o">%</span><span class="p">}</span>
+<span class="o">&lt;</span><span class="n">h3</span> <span class="o">&gt;</span><span class="n">the</span> <span class="n">cost</span> <span class="n">of</span> <span class="p">{{</span> <span class="n">name</span> <span class="p">}}</span> <span class="n">is</span> <span class="p">{{</span> <span class="n">prises</span> <span class="p">}}.</span> <span class="o">&lt;/</span><span class="n">h3</span><span class="o">&gt;</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">endfor</span> <span class="o">%</span><span class="p">}</span>
+<span class="o">&lt;/</span><span class="n">main</span><span class="o">&gt;</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">endblock</span> <span class="o">%</span><span class="p">}</span>
+</code></pre></div><h4 id="conditionals--comparison-operators">Conditionals &amp; comparison operators</h4>
+<p>numbers = [1,2,3,4,5,6,7,8,9,10]
+Print only even numbers</p>
+<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="nd">@app.route</span><span class="p">(</span><span class="s2">&#34;/variable&#34;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">variable</span><span class="p">():</span>
+    <span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&#34;public/main/variable.html&#34;</span><span class="p">,</span>
+				<span class="n">numbers</span><span class="o">=</span><span class="n">numbers</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-h" data-lang="h"><span class="p">{</span><span class="o">%</span> <span class="n">extends</span> <span class="s">&#34;public/layout/base.html&#34;</span> <span class="o">%</span><span class="p">}</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">block</span> <span class="n">content</span> <span class="o">%</span><span class="p">}</span>
+<span class="o">&lt;</span><span class="n">main</span> <span class="n">role</span><span class="o">=</span><span class="s">&#34;main&#34;</span> <span class="n">class</span><span class="o">=</span><span class="s">&#34;container&#34;</span><span class="o">&gt;</span>
+<span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">i</span> <span class="n">in</span> <span class="n">numbers</span><span class="o">%</span><span class="p">}</span>
+<span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">i</span><span class="o">%</span><span class="mi">2</span><span class="o">==</span><span class="mi">0</span> <span class="o">%</span><span class="p">}</span>
+<span class="o">&lt;</span><span class="n">h3</span> <span class="o">&gt;</span><span class="n">even</span> <span class="p">{{</span><span class="n">i</span><span class="p">}}.</span> <span class="o">&lt;/</span><span class="n">h3</span><span class="o">&gt;</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">endfor</span> <span class="o">%</span><span class="p">}</span>
+<span class="o">&lt;/</span><span class="n">main</span><span class="o">&gt;</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">endblock</span> <span class="o">%</span><span class="p">}</span>
+</code></pre></div><p><code>Notice</code>:- Every block start and ends by there name.</p>
+<p>Sumup all code .</p>
+<p>Create a new view in views.py
+<code>&lt;root&gt;/application/views.py</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/variable&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">variable</span><span class="p">():</span>
+    <span class="n">my_name</span> <span class="o">=</span> <span class="s2">&#34;xyz&#34;</span>
+    <span class="n">listname</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;Tom&#34;</span><span class="p">,</span><span class="s2">&#34;Jarry&#34;</span><span class="p">,</span><span class="s2">&#34;Oggy&#34;</span><span class="p">,</span><span class="s2">&#34;cockroaches&#34;</span><span class="p">]</span>
+    <span class="n">prise</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&#34;water&#34;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="s2">&#34;colddrink&#34;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+    <span class="s2">&#34;softdrink&#34;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+    <span class="s2">&#34;mango&#34;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="s2">&#34;nuts&#34;</span><span class="p">:</span> <span class="mi">34</span>
+    <span class="p">}</span>
+    <span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;public/main/variable.html&#39;</span><span class="p">,</span>
+                            <span class="n">name</span> <span class="o">=</span><span class="n">my_name</span><span class="p">,</span>
+                            <span class="n">listname</span> <span class="o">=</span><span class="n">listname</span><span class="p">,</span>
+                            <span class="n">prises</span> <span class="o">=</span><span class="n">prise</span><span class="p">,</span>
+                            <span class="n">numbers</span> <span class="o">=</span><span class="n">numbers</span><span class="p">)</span>
+</code></pre></div><p>Add new variable templates.</p>
+<p><code>&lt;root&gt;/application/templates/public/main/variable.html</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-h" data-lang="h"><span class="p">{</span><span class="o">%</span> <span class="n">extends</span> <span class="s">&#34;public/layout/base.html&#34;</span> <span class="o">%</span><span class="p">}</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">block</span> <span class="n">content</span> <span class="o">%</span><span class="p">}</span>
+<span class="o">&lt;</span><span class="n">main</span> <span class="n">role</span><span class="o">=</span><span class="s">&#34;main&#34;</span> <span class="n">class</span><span class="o">=</span><span class="s">&#34;container&#34;</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">h3</span><span class="o">&gt;</span><span class="n">Single</span> <span class="n">Variable</span><span class="o">&lt;/</span><span class="n">h3</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">h5</span><span class="o">&gt;</span> <span class="n">Hello</span> <span class="p">{{</span> <span class="n">name</span> <span class="p">}}</span> <span class="o">&lt;/</span><span class="n">h5</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">hr</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">h3</span><span class="o">&gt;</span><span class="n">List</span> <span class="n">Variable</span><span class="o">&lt;/</span><span class="n">h3</span><span class="o">&gt;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">name</span> <span class="n">in</span> <span class="n">listname</span> <span class="o">%</span><span class="p">}</span>
+    <span class="o">&lt;</span><span class="n">h5</span><span class="o">&gt;</span> <span class="n">Hello</span> <span class="p">{{</span> <span class="n">name</span> <span class="p">}}</span> <span class="o">&lt;/</span><span class="n">h5</span><span class="o">&gt;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">endfor</span> <span class="o">%</span><span class="p">}</span>
+    <span class="o">&lt;</span><span class="n">hr</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">h3</span><span class="o">&gt;</span><span class="n">Dictionaries</span><span class="o">&lt;/</span><span class="n">h3</span><span class="o">&gt;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">prise</span> <span class="n">in</span> <span class="n">prises</span><span class="p">.</span><span class="n">items</span><span class="p">()</span> <span class="o">%</span><span class="p">}</span>
+    <span class="o">&lt;</span><span class="n">h5</span><span class="o">&gt;</span><span class="n">the</span> <span class="n">cost</span> <span class="n">of</span> <span class="p">{{</span> <span class="n">name</span> <span class="p">}}</span> <span class="n">is</span> <span class="p">{{</span> <span class="n">prise</span> <span class="p">}}.</span> <span class="o">&lt;/</span><span class="n">h5</span><span class="o">&gt;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">endfor</span> <span class="o">%</span><span class="p">}</span>
+    <span class="o">&lt;</span><span class="n">hr</span><span class="o">&gt;</span>
+
+    <span class="o">&lt;</span><span class="n">h3</span><span class="o">&gt;</span><span class="n">Conditionals</span> <span class="o">&amp;</span> <span class="n">comparison</span> <span class="n">operators</span><span class="o">&lt;/</span><span class="n">h3</span><span class="o">&gt;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">i</span> <span class="n">in</span> <span class="n">numbers</span><span class="o">%</span><span class="p">}</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">i</span><span class="o">%</span><span class="mi">2</span><span class="o">==</span><span class="mi">0</span> <span class="o">%</span><span class="p">}</span>
+    <span class="o">&lt;</span><span class="n">h5</span><span class="o">&gt;</span><span class="n">even</span> <span class="p">{{</span><span class="n">i</span><span class="p">}}.</span> <span class="o">&lt;/</span><span class="n">h5</span><span class="o">&gt;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">endfor</span> <span class="o">%</span><span class="p">}</span>
+<span class="o">&lt;/</span><span class="n">main</span><span class="o">&gt;</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">endblock</span> <span class="o">%</span><span class="p">}</span>
+</code></pre></div><h3 id="wrapping-up">Wrapping up</h3>
+<p>As you can see Jinja provides all those things which you have learned in python.</p>
+<p>I highly suggest you have a look through the <a href="https://jinja.palletsprojects.com/en/2.11.x/"target="_blank">Jinja documentation</a> to grasp even more knowledge of this awesome templating language.</p>
+<p>In the upcoming segment we are creating some user interface so the user can interact with the application (e.g., Form, login)</p>
+<h5 id="if-you-stuck-someware-checkout-my-code">If you stuck someware checkout my code</h5>
+<p><a href="https://github.com/Apex1000/flask-blog"target="_blank">Github</a></p>
+<h5 id="still-need-any-help">Still need any help!</h5>
+<p><a href="https://www.instagram.com/siddythings/"target="_blank">Instagarm</a></p></article><section class="article labels"><a class="category" href=/categories/flask/>Flask</a><a class="category" href=/categories/flask-beginner/>Flask Beginner</a><a class="tag" href=/tags/python/>python</a><a class="tag" href=/tags/flask/>Flask</a><a class="tag" href=/tags/web-development/>web development</a></section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/adding-html-files/"><span class="iconfont icon-article"></span>Adding HTML files | Ep. 03</a></p></section></div></section><section id="footer"><div style="display:flex; flex-direction:row; flex-wrap:wrap; justify-content:center;">
+    <p style=" flex-shrink: 0;">©2020 siddythings.</p>
+</div></section></body>
+
+</html>

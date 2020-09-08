@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+
+<meta name="twitter:description" content="Creating forms, posting data to views and working with form data in Flask">
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:domain" content="siddythings.github.io" />
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="siddythings" />
+
+<link rel="shortcut icon" href="/img/favicon.ico"><title>Working with Flask | Ep. 07&nbsp;&ndash;&nbsp;Siddythings</title><link rel="stylesheet" href="/css/core.min.35c2fe648c6da825f8b00570c3daac0f128c5c86ec631edcf2c847afb817ea48b4772d6fb7c02379afbaa728c401e788.css" integrity="sha384-NcL&#43;ZIxtqCX4sAVww9qsDxKMXIbsYx7c8shHr7gX6ki0dy1vt8Ajea&#43;6pyjEAeeI"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Working with Flask | Ep. 07" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><img class="site logo" src="/img/logo.png" alt /><span class="site name">Siddythings</span></a></span>
+        <span class="header right-side"><div class="nav wrap">
+    <nav class="nav">
+        <a class="nav item" href="/"><span class="iconfont icon-user"></span>&nbsp;Posts</a><a class="nav item " href="/categories/">Categories</a><a class="nav item" href="/tags/"><i data-icon="&#x21dd;"></i> Tags</a><a class="nav item" href="/about/"><span class="iconfont icon-user"></span>&nbsp;About</a>
+        <a class="nav item" href="https://github.com/apex1000" target="_blank"><span
+                class="iconfont icon-github"></span>&nbsp;Github</a>
+    </nav>
+</div></span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Working with Flask | Ep. 07</h1><p class="article date">September 6</p></section><article class="article markdown-body"><p>Hello,
+In this segment, we are going to talk about Forms.
+Forms are the way to take user inputs.
+You&rsquo;ll learn about post form to a flask view and work with incoming data.</p>
+<h5 id="in-this-example-we-are-creating-a-simple-todo-app-user-form">In this example, We are creating a simple todo app user form.</h5>
+<h3 id="creating-a-new-route">Creating a new route</h3>
+<p>Create a new route in <code>views.py</code></p>
+<p><code>&lt;root&gt;/application/views.py</code></p>
+<pre><code>@app.route(&quot;/todo&quot;)
+def todo():
+    return render_template(&quot;public/todo.html&quot;)
+</code></pre><p>We&rsquo;re going to accepting <code>POST</code> request from the form so we need to pass another argument to <code>@app.route</code></p>
+<p>we do this by passing methods argument, along with a list of methods as value</p>
+<p>Flask supports all of the common HTTP methods including:</p>
+<ul>
+<li>GET</li>
+<li>POST</li>
+<li>PUT</li>
+<li>DELETE</li>
+</ul>
+<p>So let&rsquo;s add methods in the <code>@app.route</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="nd">@app.route</span><span class="p">(</span><span class="s2">&#34;/todo&#34;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span><span class="s1">&#39;POST&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">todo</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&#34;public/main/todo.html&#34;</span><span class="p">)</span>
+</code></pre></div><p><code>Tip:-</code> If you don&rsquo;t know about <a href="">HTTP methods</a></p>
+<p><code>Note:-</code> Flask routes support <code>GET</code> requests by default, but if you need to add any specific method then you have to add those methods.</p>
+<p>Now Let&rsquo;s create templates for views</p>
+<p><code>&lt;root&gt;/application/public/main/todo.html</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html">{% extends &#34;public/layout/base.html&#34; %}
+{% block content %}
+<span class="p">&lt;</span><span class="nt">main</span> <span class="na">role</span><span class="o">=</span><span class="s">&#34;main&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;container&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span>Todo App<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+{% endblock %}
+</code></pre></div><p>Save the page and go to localhost:5000/todo
+you&rsquo;ll see the page</p>
+<p>Now add a form</p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&#34;/todo&#34;</span> <span class="na">method</span><span class="o">=</span><span class="s">&#34;POST&#34;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;form-group&#34;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">label</span><span class="p">&gt;</span>Task<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;form-control&#34;</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;username&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;task&#34;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&#34;name&#34;</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;submit&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;btn btn-primary&#34;</span><span class="p">&gt;</span>Add Task<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</code></pre></div><p><code>Notice:</code> <code>action='/todo'</code> and <code>method='POST'</code></p>
+<p>The <code>action</code> tells the form where to send user data, and the <code>method</code> tells what type of request form makes</p>
+<p>Your templates will look like</p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html">{% extends &#34;public/layout/base.html&#34; %}
+{% block content %}
+
+<span class="p">&lt;</span><span class="nt">main</span> <span class="na">role</span><span class="o">=</span><span class="s">&#34;main&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;container&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span>Todo App<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&#34;/todo&#34;</span> <span class="na">method</span><span class="o">=</span><span class="s">&#34;POST&#34;</span><span class="p">&gt;</span>
+
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;form-group&#34;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">label</span><span class="p">&gt;</span>Task<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;form-control&#34;</span>  <span class="na">name</span><span class="o">=</span><span class="s">&#34;task&#34;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&#34;Add Task&#34;</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;submit&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;btn btn-primary&#34;</span><span class="p">&gt;</span>Add Task<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+      
+<span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+{% endblock %}
+
+</code></pre></div><p>Save it and refresh the page now you will see the form try to add any task.</p>
+<p>It doesn&rsquo;t show anything because we haven&rsquo;t handled the form data from the <code>views.py</code></p>
+<p>Open <code>views.py</code></p>
+<p>We need to add a few things to our <code>views.py</code> file</p>
+<ul>
+<li>import request for handling the form request by adding from flask import   redirect, request</li>
+<li>also, add request handler means when there is a POST request then how the views react.</li>
+</ul>
+<h5 id="request-handler">Request handler</h5>
+<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="nd">@app.route</span><span class="p">(</span><span class="s2">&#34;/todo&#34;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span><span class="s1">&#39;POST&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">todo</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&#34;POST&#34;</span><span class="p">:</span>
+      <span class="n">name</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;task&#39;</span><span class="p">]</span>
+      <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&#34;public/main/todo.html&#34;</span><span class="p">,</span><span class="n">task</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&#34;public/main/todo.html&#34;</span><span class="p">,</span><span class="n">task</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+</code></pre></div><p>As you can see</p>
+<p>There is an if condition which is just checking the type of request.
+<code>if request.method == &quot;POST&quot;</code></p>
+<p>we have added a name tag in our <code>HTML</code> input form by which you can access the value of that input field.</p>
+<p><code>value = request.form['task']</code></p>
+<p>Till now user can send the data to the flask views but can&rsquo;t see it, we need to send back the data by which the user can see the task list
+So we send the data object</p>
+<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&#34;public/main/todo.html&#34;</span><span class="p">,</span><span class="n">task</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+</code></pre></div><p>After all this
+<code>views.py</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="nd">@app.route</span><span class="p">(</span><span class="s2">&#34;/todo&#34;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;GET&#34;</span><span class="p">,</span><span class="s2">&#34;POST&#34;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">todo</span><span class="p">():</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&#34;POST&#34;</span><span class="p">):</span>
+      <span class="n">value</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s2">&#34;task&#34;</span><span class="p">]</span>
+      <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&#34;public/main/todo.html&#34;</span><span class="p">,</span><span class="n">task</span><span class="o">=</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&#34;public/main/todo.html&#34;</span><span class="p">)</span>
+</code></pre></div><p><code>todo.html</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html">{% extends &#34;public/layout/base.html&#34; %}
+{% block content %}
+
+<span class="p">&lt;</span><span class="nt">main</span> <span class="na">role</span><span class="o">=</span><span class="s">&#34;main&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;container&#34;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span>Todo App<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&#34;/todo&#34;</span> <span class="na">method</span><span class="o">=</span><span class="s">&#34;POST&#34;</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;form-group&#34;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">label</span><span class="p">&gt;</span>Task<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;form-control&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;task&#34;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&#34;Add Task&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;submit&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;btn btn-primary&#34;</span><span class="p">&gt;</span>Add Task<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>{{task}}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+{% endblock %}
+</code></pre></div><p>But in this, we can not add more than 1 task so we need something which can store more than one record like a list</p>
+<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="n">tasks</span> <span class="o">=</span> <span class="p">[]</span> <span class="o">//</span><span class="k">global</span> <span class="nb">list</span>
+<span class="nd">@app.route</span><span class="p">(</span><span class="s2">&#34;/todo&#34;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;GET&#34;</span><span class="p">,</span><span class="s2">&#34;POST&#34;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">todo</span><span class="p">():</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&#34;POST&#34;</span><span class="p">):</span>
+      <span class="n">value</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s2">&#34;task&#34;</span><span class="p">]</span>
+      <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&#34;public/main/todo.html&#34;</span><span class="p">,</span><span class="n">task</span><span class="o">=</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&#34;public/main/todo.html&#34;</span><span class="p">)</span>
+</code></pre></div><p>Here tasks act as a database that stores values on a temporary basis.</p>
+<p><code>todo.html</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html">{% extends &#34;public/layout/base.html&#34; %}
+{% block content %}
+
+<span class="p">&lt;</span><span class="nt">main</span> <span class="na">role</span><span class="o">=</span><span class="s">&#34;main&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;container&#34;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span>Todo App<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&#34;/todo&#34;</span> <span class="na">method</span><span class="o">=</span><span class="s">&#34;POST&#34;</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;form-group&#34;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">label</span><span class="p">&gt;</span>Task<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;form-control&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;task&#34;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&#34;Add Task&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;submit&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;btn btn-primary&#34;</span><span class="p">&gt;</span>Add Task<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+  {% for task in tasks%}
+  <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>{{task}}<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+  {% endfor %}
+<span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+{% endblock %}
+</code></pre></div><h3 id="wrapping-up">Wrapping up</h3>
+<p>In this segment we have learn user inputs.
+Try to do some project yourself</p>
+<p>In the upcoming segment we are learing URL, routes</p>
+<h5 id="if-you-stuck-someware-checkout-my-code">If you stuck someware checkout my code</h5>
+<p><a href="https://github.com/Apex1000/flask-blog"target="_blank">Github</a></p>
+<h5 id="still-need-any-help-just-dm">Still need any help! Just DM</h5>
+<p><a href="https://www.instagram.com/siddythings/"target="_blank">Instagarm</a></p></article><section class="article labels"><a class="category" href=/categories/flask/>Flask</a><a class="category" href=/categories/flask-beginner/>Flask Beginner</a><a class="tag" href=/tags/python/>python</a><a class="tag" href=/tags/flask/>Flask</a><a class="tag" href=/tags/web-development/>web development</a></section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/jinja-templating-part-02/"><span class="iconfont icon-article"></span>Jinja Templating Flask Part-02 | Ep. 06</a></p><p><a class="link" href="/post/adding-html-files/"><span class="iconfont icon-article"></span>Adding HTML files | Ep. 03</a></p></section></div></section><section id="footer"><div style="display:flex; flex-direction:row; flex-wrap:wrap; justify-content:center;">
+    <p style=" flex-shrink: 0;">©2020 siddythings.</p>
+</div></section></body>
+
+</html>

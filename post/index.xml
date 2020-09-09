@@ -7,10 +7,34 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>©2020 siddythings.</copyright>
-    <lastBuildDate>Sun, 06 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 07 Sep 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Dynamic URLs with Flask | Ep. 08</title>
+      <link>/post/flask-dynamic-urls/</link>
+      <pubDate>Mon, 07 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/flask-dynamic-urls/</guid>
+      <description>&lt;p&gt;Hii,
+In this segment, we are learning about mapping routes to a navbar and create dynamic URLs.&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Creating forms with Flask | Ep. 07</title>
+      <link>/post/forms-in-flask/</link>
+      <pubDate>Sun, 06 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/forms-in-flask/</guid>
+      <description>&lt;p&gt;Hello,
+In this segment, we are going to talk about Forms.
+Forms are the way to take user inputs.
+You&amp;rsquo;ll learn about post form to a flask view and work with incoming data.&lt;/p&gt;</description>
+      
+    </item>
     
     <item>
       <title>Jinja Templating Flask Part-02 | Ep. 06</title>
@@ -21,19 +45,6 @@
       <description>&lt;p&gt;Hello,
 This segment is going to a bit more about Jinja templating.
 In the last segment, you have to learn how to create base templates, child templates, and how to extend and include templates.&lt;/p&gt;</description>
-      
-    </item>
-    
-    <item>
-      <title>Working with Flask | Ep. 07</title>
-      <link>/post/forms-in-flask/</link>
-      <pubDate>Sun, 06 Sep 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/post/forms-in-flask/</guid>
-      <description>&lt;p&gt;Hello,
-In this segment, we are going to talk about Forms.
-Forms are the way to take user inputs.
-You&amp;rsquo;ll learn about post form to a flask view and work with incoming data.&lt;/p&gt;</description>
       
     </item>
     

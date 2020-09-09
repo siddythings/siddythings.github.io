@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+
+<meta name="twitter:description" content="Learn how to link nevbar and create and work with dynamic URLs and dynamic data in Flask">
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:domain" content="siddythings.github.io" />
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="siddythings" />
+
+<link rel="shortcut icon" href="/img/favicon.ico"><title>Dynamic URLs with Flask | Ep. 08&nbsp;&ndash;&nbsp;Siddythings</title><link rel="stylesheet" href="/css/core.min.35c2fe648c6da825f8b00570c3daac0f128c5c86ec631edcf2c847afb817ea48b4772d6fb7c02379afbaa728c401e788.css" integrity="sha384-NcL&#43;ZIxtqCX4sAVww9qsDxKMXIbsYx7c8shHr7gX6ki0dy1vt8Ajea&#43;6pyjEAeeI"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Dynamic URLs with Flask | Ep. 08" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><img class="site logo" src="/img/logo.png" alt /><span class="site name">Siddythings</span></a></span>
+        <span class="header right-side"><div class="nav wrap">
+    <nav class="nav">
+        <a class="nav item" href="/"><span class="iconfont icon-user"></span>&nbsp;Posts</a><a class="nav item " href="/categories/">Categories</a><a class="nav item" href="/tags/"><i data-icon="&#x21dd;"></i> Tags</a><a class="nav item" href="/about/"><span class="iconfont icon-user"></span>&nbsp;About</a>
+        <a class="nav item" href="https://github.com/apex1000" target="_blank"><span
+                class="iconfont icon-github"></span>&nbsp;Github</a>
+    </nav>
+</div></span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Dynamic URLs with Flask | Ep. 08</h1><p class="article date">September 7</p></section><article class="article markdown-body"><p>Hii,
+In this segment, we are learning about mapping routes to a navbar and create dynamic URLs.</p>
+<p>Dynamic URLs play a very important role in the ability to create unique URLs that aren&rsquo;t hardcoded into our application.</p>
+<p>For example, let&rsquo;s say you create an application that allows users to create an account and log in to their profile, we&rsquo;ll need a way to dynamically generate a route for that specific user.</p>
+<h3 id="linking-navbar">Linking navbar</h3>
+<p>Link your navbar to your routes</p>
+<ul>
+<li>Using your URL path  <code>href=&quot;/blog&quot;</code></li>
+<li>Using <code>url_for('&lt;function&gt;')</code> <code>e.g. href=&quot;{{url_for('todo')}}&quot;</code></li>
+</ul>
+<p><code>&lt;root&gt;/application/templates/public/navbar.html Open navbar.html</code></p>
+<pre><code>&lt;ul class=&quot;navbar-nav mr-auto&quot;&gt;
+                &lt;li class=&quot;nav-item active&quot;&gt;
+                    &lt;a class=&quot;nav-link&quot; href=&quot;/&quot;&gt;Home &lt;span class=&quot;sr-only&quot;&gt;(current)&lt;/span&gt;&lt;/a&gt;
+                &lt;/li&gt;
+                &lt;li class=&quot;nav-item active&quot;&gt;
+                    &lt;a class=&quot;nav-link&quot; href=&quot;/blog&quot;&gt;Blog &lt;span class=&quot;sr-only&quot;&gt;(current)&lt;/span&gt;&lt;/a&gt;
+                &lt;/li&gt;
+                &lt;li class=&quot;nav-item active&quot;&gt;
+                    &lt;a class=&quot;nav-link&quot; href=&quot;/about&quot;&gt;About &lt;span class=&quot;sr-only&quot;&gt;(current)&lt;/span&gt;&lt;/a&gt;
+                &lt;/li&gt;
+                &lt;li class=&quot;nav-item active&quot;&gt;
+                    &lt;a class=&quot;nav-link&quot; href=&quot;{{url_for('todo')}}&quot;&gt;Todo &lt;span class=&quot;sr-only&quot;&gt;(current)&lt;/span&gt;&lt;/a&gt;
+                &lt;/li&gt;
+&lt;/ul&gt;
+</code></pre><h3 id="creating-a-dynamic-route">Creating a dynamic route</h3>
+<p>Lets first create a sign in route in our <code>views.py</code> file</p>
+<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="nd">@app.route</span><span class="p">(</span><span class="s2">&#34;/signin&#34;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">signin</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&#34;public/main/signup.html&#34;</span><span class="p">)</span>
+</code></pre></div><p>Also, create a new template signup.html</p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html">{% extends &#34;public/layout/base.html&#34; %}
+{% block content %}
+<span class="p">&lt;</span><span class="nt">main</span> <span class="na">role</span><span class="o">=</span><span class="s">&#34;main&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;container&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;mt-5&#34;</span><span class="p">&gt;</span>Profile<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+{% endblock %}
+</code></pre></div><p>At this movement, your URL isn&rsquo;t dynamic. We need to make some changes to our <code>@app.route</code> decorator.</p>
+<p>We are adding a variable in the decorator which can take values as input from the user.</p>
+<p><code>@app.route(&quot;/signup/&lt;username&gt;)</code></p>
+<ul>
+<li>We&rsquo;ve added trailing slash to <code>/signup/</code></li>
+<li>We&rsquo;ve provided a variable in the URL path and wrapped in with two opposing arrows <code>&lt;&gt;</code> as shown.
+username is a variable which can store dynamic values
+Now we need to make some changes to our <code>views.py</code></li>
+</ul>
+<p><code>@app.route('/signin/&lt;username&gt;')</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="k">def</span> <span class="nf">signin</span><span class="p">(</span><span class="n">username</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&#34;public/main/profile.html&#34;</span><span class="p">,</span><span class="n">username</span><span class="o">=</span><span class="n">username</span><span class="p">)</span>
+</code></pre></div><p>Now, we are using the username variable to pass in the function as an argument and sending back to your HTML page as an object</p>
+<p>I hope you can understand the cycle of data flow, we are sending data from URL to page.</p>
+<p>Now we need to add an object in the HTML page.</p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html">{% extends &#34;public/layout/base.html&#34; %}
+{% block content %}
+<span class="p">&lt;</span><span class="nt">main</span> <span class="na">role</span><span class="o">=</span><span class="s">&#34;main&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;container&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;mt-5&#34;</span><span class="p">&gt;</span>Profile<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+   <span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span> Hello {{username}} <span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+{% endblock %}
+</code></pre></div><p>After all, these changes save it.</p>
+<p>Start your application.</p>
+<p><code>And Hit :-</code> <a href="127.0.0.1:5000/signin/siddythings">127.0.0.1:5000/signin/siddythings</a></p>
+<p>You&rsquo;ll see something like this in your window</p>
+<p><code>Hello siddythings </code></p>
+<p><code>Tip:</code> Try to put your name in the place of <code>siddything</code>.</p>
+<h3 id="multiple-dynamic-variables">Multiple dynamic variables</h3>
+<p>Open <code>views.py</code> file</p>
+<p><code>@app.route(&quot;/multiple/&lt;name&gt;/&lt;age&gt;/&lt;country&gt;&quot;)</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="k">def</span> <span class="nf">multiple</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">age</span><span class="p">,</span><span class="n">country</span><span class="p">):</span>
+	<span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&#34;public/main/multipal.html&#34;</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span><span class="n">age</span><span class="o">=</span><span class="n">age</span><span class="p">,</span><span class="n">country</span><span class="o">=</span><span class="n">country</span><span class="p">)</span>
+</code></pre></div><p>Create <code>multipal.html</code> file</p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html">{% extends &#34;public/layout/base.html&#34; %}
+{% block content %}
+<span class="p">&lt;</span><span class="nt">main</span> <span class="na">role</span><span class="o">=</span><span class="s">&#34;main&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;container&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;mt-5&#34;</span><span class="p">&gt;</span>Profile<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span>Name : {{name}}<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span>Age : {{age}}<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span>Country : {{country}}<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+{% endblock %}
+</code></pre></div><p>Save everything and restart your application</p>
+<p>Hit:- <a href="http://127.0.0.1:5000/multiple/siddythings/23/USA"target="_blank">http://127.0.0.1:5000/multiple/siddythings/23/USA</a></p>
+<h3 id="wrapping-up">Wrapping up</h3>
+<p>In this segment we have learn about dyanamic urls and linking navbar.
+Try to do some project yourself</p>
+<p>In the upcoming segment we are learing about linking Database to our application.</p>
+<h5 id="if-you-stuck-someware-checkout-my-code">If you stuck someware checkout my code</h5>
+<p><a href="https://github.com/Apex1000/flask-blog"target="_blank">Github</a></p>
+<h5 id="still-need-any-help-just-dm">Still need any help! Just DM</h5>
+<p><a href="https://www.instagram.com/siddythings/"target="_blank">Instagarm</a></p></article><section class="article labels"><a class="category" href=/categories/flask/>Flask</a><a class="category" href=/categories/flask-beginner/>Flask Beginner</a><a class="tag" href=/tags/python/>python</a><a class="tag" href=/tags/flask/>Flask</a><a class="tag" href=/tags/web-development/>web development</a></section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/forms-in-flask/"><span class="iconfont icon-article"></span>Creating forms with Flask | Ep. 07</a></p></section></div></section><section id="footer"><div style="display:flex; flex-direction:row; flex-wrap:wrap; justify-content:center;">
+    <p style=" flex-shrink: 0;">©2020 siddythings.</p>
+</div></section></body>
+
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+
+<meta name="twitter:description" content="Configuring Flask applications using a config file">
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:domain" content="siddythings.github.io" />
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="siddythings" />
+
+<link rel="shortcut icon" href="/img/favicon.ico"><title>Flask configuration files | Ep. 09&nbsp;&ndash;&nbsp;Siddythings</title><link rel="stylesheet" href="/css/core.min.35c2fe648c6da825f8b00570c3daac0f128c5c86ec631edcf2c847afb817ea48b4772d6fb7c02379afbaa728c401e788.css" integrity="sha384-NcL&#43;ZIxtqCX4sAVww9qsDxKMXIbsYx7c8shHr7gX6ki0dy1vt8Ajea&#43;6pyjEAeeI"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Flask configuration files | Ep. 09" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><img class="site logo" src="/img/logo.png" alt /><span class="site name">Siddythings</span></a></span>
+        <span class="header right-side"><div class="nav wrap">
+    <nav class="nav">
+        <a class="nav item" href="/"><span class="iconfont icon-user"></span>&nbsp;Posts</a><a class="nav item " href="/categories/">Categories</a><a class="nav item" href="/tags/"><i data-icon="&#x21dd;"></i> Tags</a><a class="nav item" href="/about/"><span class="iconfont icon-user"></span>&nbsp;About</a>
+        <a class="nav item" href="https://github.com/apex1000" target="_blank"><span
+                class="iconfont icon-github"></span>&nbsp;Github</a>
+    </nav>
+</div></span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Flask configuration files | Ep. 09</h1><p class="article date">September 8</p></section><article class="article markdown-body"><p>Hello,</p>
+<p>In this segment, we are talking about the configuration file. We&rsquo;re going to talk about the configuration method, using a config file.</p>
+<p>The configuration is an important part of any application and, Flask provides many different ways to configure your application like setting your environment type and depending upon there database.</p>
+<h3 id="config-basics">Config basics</h3>
+<p>Every Flask application has a global config object which can be accessed via <code>app.config</code>.</p>
+<p><code>config object</code> allows us to assign values to configuration variables, which can be used in the application.</p>
+<p>You can see your <code>Global config objects</code> just simply print it one of your routes. Go ahead and add the following line.</p>
+<p><code>print(app.config)</code></p>
+<p>And you will see this in your terminal.</p>
+<pre><code>{
+	'ENV': 'development',
+	'DEBUG': False,
+	'TESTING': False,
+	'PROPAGATE_EXCEPTIONS': None,
+	'PRESERVE_CONTEXT_ON_EXCEPTION': None,
+	'SECRET_KEY': None,
+	'PERMANENT_SESSION_LIFETIME': datetime.timedelta(31),
+	'USE_X_SENDFILE': False,
+	'SERVER_NAME': None,
+	'APPLICATION_ROOT': '/',
+	'SESSION_COOKIE_NAME': 'session',
+	'SESSION_COOKIE_DOMAIN': None,
+	'SESSION_COOKIE_PATH': None,
+	'SESSION_COOKIE_HTTPONLY': True,
+	'SESSION_COOKIE_SECURE': False,
+	'SESSION_COOKIE_SAMESITE': None,
+	'SESSION_REFRESH_EACH_REQUEST': True,
+	'MAX_CONTENT_LENGTH': None,
+	'SEND_FILE_MAX_AGE_DEFAULT': datetime.timedelta(0, 43200),
+	'TRAP_BAD_REQUEST_ERRORS': None,
+	'TRAP_HTTP_EXCEPTIONS': False,
+	'EXPLAIN_TEMPLATE_LOADING': False,
+	'PREFERRED_URL_SCHEME': 'http',
+	'JSON_AS_ASCII': True,
+	'JSON_SORT_KEYS': True,
+	'JSONIFY_PRETTYPRINT_REGULAR': False,
+	'JSONIFY_MIMETYPE': 'application/json',
+	'TEMPLATES_AUTO_RELOAD': None,
+	'MAX_COOKIE_SIZE': 4093,
+}
+</code></pre><p>All these are the default <code>built-in configuration</code>variables, which we can modify and change.</p>
+<p>To change any of these variable, we just need to assign a new value to the key:
+<code>app.config[&quot;KEY&quot;] = &quot;value</code></p>
+<p>For example, let&rsquo;s update the configuration <code>SECRET_KEY</code> variable with the following:</p>
+<p><code>app.config[&quot;SECRET_KEY&quot;] = &quot;qwert653443&quot;</code></p>
+<p><code>print(app.config[&quot;SECRET_KEY&quot;])</code></p>
+<p>You&rsquo;ll see the following in your terminal:</p>
+<pre><code>qwert653443
+</code></pre><p>Let us define a config file for our application.</p>
+<h3 id="app-config-file">App config file</h3>
+<p>Flask allows us to create a custom <code>config</code> file.
+so it can overwrite the default <code>config</code> variables.</p>
+<p>So let&rsquo;s create of <code>config.py</code> file in the root folder.</p>
+<p><code>&lt;root&gt;/config.py</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="k">class</span> <span class="nc">Config</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">DEBUG</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">TESTING</span> <span class="o">=</span> <span class="bp">False</span>
+
+<span class="k">class</span> <span class="nc">Production</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">Development</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
+    <span class="n">DEBUG</span> <span class="o">=</span> <span class="bp">True</span>
+</code></pre></div><p>We first create the Config class and set some default attributes.</p>
+<p>We have created 3 more classes and each of which inherits the Config class and attributes.</p>
+<ul>
+<li>Production - Is the config class we&rsquo;ll use for running in production</li>
+<li>Development - Is the config class we&rsquo;ll use for development</li>
+</ul>
+<p>Let&rsquo;s create our config file</p>
+<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
+    <span class="s2">&#34;&#34;&#34;Base config.&#34;&#34;&#34;</span>
+    <span class="n">SECRET_KEY</span> <span class="o">=</span> <span class="s2">&#34;worldisbest&#34;</span>
+    <span class="n">STATIC_FOLDER</span> <span class="o">=</span> <span class="s1">&#39;static&#39;</span>
+    <span class="n">TEMPLATES_FOLDER</span> <span class="o">=</span> <span class="s1">&#39;templates&#39;</span>
+   
+    <span class="n">DEBUG</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="k">class</span> <span class="nc">Production</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
+    <span class="n">FLASK_ENV</span> <span class="o">=</span> <span class="s1">&#39;production&#39;</span>
+    <span class="n">DEBUG</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">TESTING</span> <span class="o">=</span> <span class="bp">False</span>
+   
+<span class="k">class</span> <span class="nc">Development</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
+    <span class="n">FLASK_ENV</span> <span class="o">=</span> <span class="s1">&#39;development&#39;</span>
+    <span class="n">DEBUG</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">TESTING</span> <span class="o">=</span> <span class="bp">True</span>
+
+</code></pre></div><p>We&rsquo;ve assigned new values</p>
+<p>Now that we&rsquo;ve created our config file, we&rsquo;ll need to instruct Flask to load it.</p>
+<h3 id="loading-a-config-file">Loading a config file</h3>
+<p>Adding a config file is a simple one-liner and should be placed as close to wherever you&rsquo;ve created your app object.</p>
+<p>The best way to add a config file is just after you create your app object.</p>
+<p>We load a config file with <code>from_object()</code> method
+<code>e.g. app.config.from_object&quot;config_filename.ConfigClass&quot;)</code></p>
+<p>If you want to load the Development class, we would do the following.
+<code>app.config.from_object(&quot;config.Development&quot;)</code></p>
+<p>If you want to load the Production class, we would do the following.
+<code>app.config.from_object(&quot;config.Production&quot;)</code></p>
+<p>And after all, you open your <code>__init__.py</code> file
+add your config statement just bellow your <code>app = Flask(__name__)</code> line</p>
+<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">from_object</span><span class="p">(</span><span class="s2">&#34;config.Development&#34;</span><span class="p">)</span>
+</code></pre></div><p>We can also use the <code>ENV variable</code> to set the condition in which the config file will load.</p>
+<h3 id="env-environment">ENV environment</h3>
+<p>The <code>ENV environment configuration</code> variable is important and should always be set outside of your application, which we set with FLASK_ENV from the terminal.</p>
+<p>Like in the first segment of the series</p>
+<p>By default , <code>ENV</code> set to production which disables the <code>DEBUG</code> mode and avoids displaying the interactive debugger</p>
+<p>Setting <code>FLASK_ENV=development</code> enables the debugger, which should never, ever be done in production!</p>
+<p>Now when we set the ENV variable so we can so with the following:</p>
+<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&#34;ENV&#34;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&#34;production&#34;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">from_object</span><span class="p">(</span><span class="s2">&#34;config.Production&#34;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">from_object</span><span class="p">(</span><span class="s2">&#34;config.Development&#34;</span><span class="p">)</span>
+</code></pre></div><p>This allows us to control the config environment outside the application by setting the FLASK_ENV environment variable in the terminal.</p>
+<p>IF you set <code>FLASK_ENV to development</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ <span class="nb">export</span> <span class="nv">FLASK_ENV</span><span class="o">=</span>development
+$ flask run
+* Environment: development
+ * Debug mode: on
+ * Running on http://127.0.0.1:5000/ <span class="o">(</span>Press CTRL+C to quit<span class="o">)</span>
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 249-444-542
+</code></pre></div><p>Now repeat the process, changing <code>FLASK_ENV to production:</code></p>
+<pre><code>$ export FLASK_ENV=production
+$ flask run
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+</code></pre><h3 id="wrapping-up">Wrapping up</h3>
+<p>In this segment we have learn about seting up the config file.</p>
+<p>Try to do some project by yourself.</p>
+<p>In the upcoming segment we are learing about linking Database to our application.</p>
+<h5 id="if-you-stuck-someware-checkout-my-code">If you stuck someware checkout my code</h5>
+<p><a href="https://github.com/Apex1000/flask-blog"target="_blank">Github</a></p>
+<h5 id="still-need-any-help-just-dm">Still need any help! Just DM</h5>
+<p><a href="https://www.instagram.com/siddythings/"target="_blank">Instagarm</a></p></article><section class="article labels"><a class="category" href=/categories/flask/>Flask</a><a class="category" href=/categories/flask-beginner/>Flask Beginner</a><a class="tag" href=/tags/python/>python</a><a class="tag" href=/tags/flask/>Flask</a><a class="tag" href=/tags/web-development/>web development</a></section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/flask-dynamic-urls/"><span class="iconfont icon-article"></span>Dynamic URLs with Flask | Ep. 08</a></p></section></div></section><section id="footer"><div style="display:flex; flex-direction:row; flex-wrap:wrap; justify-content:center;">
+    <p style=" flex-shrink: 0;">©2020 siddythings.</p>
+</div></section></body>
+
+</html>

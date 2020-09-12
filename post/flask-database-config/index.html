@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+
+<meta name="twitter:description" content="Connect Flask to a Database with Flask-SQLAlchemy">
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:domain" content="siddythings.github.io" />
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="siddythings" />
+
+<link rel="shortcut icon" href="/img/favicon.ico"><title>Flask Database with Flask-SQLAlchemy  | Ep. 10&nbsp;&ndash;&nbsp;Siddythings</title><link rel="stylesheet" href="/css/core.min.35c2fe648c6da825f8b00570c3daac0f128c5c86ec631edcf2c847afb817ea48b4772d6fb7c02379afbaa728c401e788.css" integrity="sha384-NcL&#43;ZIxtqCX4sAVww9qsDxKMXIbsYx7c8shHr7gX6ki0dy1vt8Ajea&#43;6pyjEAeeI"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Flask Database with Flask-SQLAlchemy  | Ep. 10" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><img class="site logo" src="/img/logo.png" alt /><span class="site name">Siddythings</span></a></span>
+        <span class="header right-side"><div class="nav wrap">
+    <nav class="nav">
+        <a class="nav item" href="/"><span class="iconfont icon-user"></span>&nbsp;Posts</a><a class="nav item " href="/categories/">Categories</a><a class="nav item" href="/tags/"><i data-icon="&#x21dd;"></i> Tags</a><a class="nav item" href="/about/"><span class="iconfont icon-user"></span>&nbsp;About</a>
+        <a class="nav item" href="https://github.com/apex1000" target="_blank"><span
+                class="iconfont icon-github"></span>&nbsp;Github</a>
+    </nav>
+</div></span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Flask Database with Flask-SQLAlchemy  | Ep. 10</h1><p class="article date">September 9</p></section><article class="article markdown-body"><p>Hello,</p>
+<p>In this segment, we are going to look at how to interact with the database in the flask.</p>
+<p>BTW Flask can easily bond with many databases. So, you can choose your own
+But in this segment, we are using <code>Flask-SQLAlchemy</code> as our database.</p>
+<p>Lots of trash talks lets get started.</p>
+<h3 id="installing-the-flask-sqlalchemy">Installing the Flask-SQLAlchemy</h3>
+<p><code>$ pip install -U Flask-SQLAlchemy</code></p>
+<p><code>pip list </code></p>
+<pre><code>Package          Version    
+---------------- -----------
+click            7.1.2      
+config           0.5.0.post0
+Flask            1.1.2      
+Flask-SQLAlchemy 2.4.4      
+itsdangerous     1.1.0      
+Jinja2           2.11.2     
+MarkupSafe       1.1.1      
+pip              9.0.1      
+pkg-resources    0.0.0      
+setuptools       39.0.1     
+SQLAlchemy       1.3.19     
+Werkzeug         1.0.1      
+</code></pre><h3 id="configuring-flask-sqlalchemy-for-your-application">Configuring Flask-SQLAlchemy For Your Application</h3>
+<p>There are a few <code>configuration variables</code> we need to set up before interacting with our database.</p>
+<p>Open <code>config.py</code></p>
+<p><code>&lt;root&gt;/config.py</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">environ</span><span class="p">,</span> <span class="n">path</span>
+<span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">basedir</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+<span class="n">load_dotenv</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">basedir</span><span class="p">,</span> <span class="s1">&#39;.env&#39;</span><span class="p">))</span>
+<span class="k">class</span> <span class="nc">Config</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;Base config.&#34;&#34;&#34;</span>
+    <span class="n">SECRET_KEY</span> <span class="o">=</span> <span class="s2">&#34;qeqwrwe1231weerw&#34;</span>
+    <span class="n">STATIC_FOLDER</span> <span class="o">=</span> <span class="s1">&#39;static&#39;</span>
+    <span class="n">TEMPLATES_FOLDER</span> <span class="o">=</span> <span class="s1">&#39;templates&#39;</span>
+<span class="n">SQLALCHEMY_DATABASE_URI</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;DATABASE_URL&#39;</span><span class="p">)</span> <span class="ow">or</span> \
+        <span class="s1">&#39;sqlite:///&#39;</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">basedir</span><span class="p">,</span> <span class="s1">&#39;database.db&#39;</span><span class="p">)</span>
+    <span class="n">SQLALCHEMY_TRACK_MODIFICATIONS</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">DEBUG</span> <span class="o">=</span> <span class="bp">True</span>
+
+<span class="k">class</span> <span class="nc">Production</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
+    <span class="n">FLASK_ENV</span> <span class="o">=</span> <span class="s1">&#39;production&#39;</span>
+    <span class="n">DEBUG</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">TESTING</span> <span class="o">=</span> <span class="bp">False</span>
+   
+<span class="k">class</span> <span class="nc">Development</span><span class="p">(</span><span class="n">Config</span><span class="p">):</span>
+    <span class="n">FLASK_ENV</span> <span class="o">=</span> <span class="s1">&#39;development&#39;</span>
+    <span class="n">DEBUG</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">TESTING</span> <span class="o">=</span> <span class="bp">True</span>
+</code></pre></div><p>There are a few variables here which are specific to <code>Flask-SQLAlchemy</code>:</p>
+<ul>
+<li><code>SQLALCHEMY_DATABASE_URI</code>: the connection string we need to connect to our database.</li>
+<li><code>SQLALCHEMY_TRACK_MODIFICATIONS</code>: I just always set this to False.</li>
+</ul>
+<p>At this movement, we haven&rsquo;t created our database file
+Create a file database.db in you <code>&lt;root&gt;</code> folder</p>
+<pre><code>.
+├── /application
+├── /env
+├── config.py
+├── database.db
+├── requirements.txt
+└── wsgi.py
+</code></pre><h3 id="initiating-flask-sqlalchemy">Initiating Flask-SQLAlchemy</h3>
+<p>In this, we are using the <code>Flask Application Factory</code> method for initiating our app.</p>
+<p>First of all, we need to <code>import SQLAlchemy</code></p>
+<p><code>from flask_sqlalchemy import SQLAlchemy</code></p>
+<p>and now we need to create an SQLAlchemy to an object so we can use our database</p>
+<p><code>db = SQLAlchemy()</code></p>
+<p>Open <code>__init__.py</code>
+<code>&lt;root&gt;/application/__init__.py</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="kn">from</span> <span class="nn">flask_sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="n">db</span> <span class="o">=</span> <span class="n">SQLAlchemy</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">create_app</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&#34;ENV&#34;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&#34;production&#34;</span><span class="p">:</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">from_object</span><span class="p">(</span><span class="s2">&#34;config.Production&#34;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">from_object</span><span class="p">(</span><span class="s2">&#34;config.Development&#34;</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">init_app</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">app</span><span class="o">.</span><span class="n">app_context</span><span class="p">():</span>
+        <span class="kn">from</span> <span class="nn">application</span> <span class="kn">import</span> <span class="n">views</span>
+        <span class="kn">from</span> <span class="nn">application</span> <span class="kn">import</span> <span class="n">admin_views</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">create_all</span><span class="p">()</span>  <span class="c1"># Create sql tables for our data models</span>
+    <span class="k">return</span> <span class="n">app</span>
+</code></pre></div><p>You have noticed <code>create_app()</code></p>
+<p>Having wrapped the app object inside of the create_app function, we still need a way to access it other than calling the function itself.</p>
+<p>Now we need to import the create_app function</p>
+<p>Open <code>wsgi.py </code></p>
+<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="kn">from</span> <span class="nn">application</span> <span class="kn">import</span> <span class="n">create_app</span> 
+<span class="n">app</span> <span class="o">=</span> <span class="n">create_app</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></div><p>Creating Database Models
+Create a models.py file in our application directory.
+<code>import</code> the <code>db</code> object that we created in<code> __init__.py</code></p>
+<pre><code>.
+├── /application
+│   ├── static
+│   ├── templates
+│   ├── __init__.py
+│   ├── adminviews.py
+│   ├── models.py
+│   └── views.py
+├── /env
+├── config.py
+├── database.db
+├── requirements.txt
+└── wsgi.py
+</code></pre><p>open <code>model.py </code></p>
+<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">db</span>
+<span class="k">class</span> <span class="nc">Todos</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s1">&#39;todos&#39;</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span>
+        <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span>
+    <span class="p">)</span>
+    <span class="n">todo</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">64</span><span class="p">),</span>
+        <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+        <span class="n">unique</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+        <span class="n">nullable</span><span class="o">=</span><span class="bp">False</span>
+    <span class="p">)</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;&lt;Todo {}&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">todo</span><span class="p">)</span>
+</code></pre></div><h3 id="creating-our-first-todo">Creating Our First Todo</h3>
+<p>Let&rsquo;s create new routes in our <code>views.py</code>
+Firstly import models and db object</p>
+<p><code>from .models import db, Todos</code></p>
+<p>And add a route to add tasks in the database</p>
+<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/todo/&lt;task&gt;&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">todos</span><span class="p">(</span><span class="n">task</span><span class="p">):</span>
+  <span class="n">new_todo</span> <span class="o">=</span> <span class="n">Todos</span><span class="p">(</span><span class="n">todo</span> <span class="o">=</span> <span class="n">task</span><span class="p">)</span>
+  <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">new_todo</span><span class="p">)</span>  <span class="c1"># Adds new Todo record to database</span>
+  <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>  <span class="c1"># Commits all changes</span>
+  <span class="k">return</span> <span class="s2">&#34;&lt;h1&gt; You have successfully created your task : &#34;</span><span class="o">+</span><span class="n">task</span><span class="o">+</span><span class="s2">&#34;&lt;/h1&gt;&#34;</span>
+</code></pre></div><p>Save everything and start your application</p>
+<p>And run application</p>
+<p><code>flask run</code></p>
+<p>Done!!</p>
+<p>Hit: <a href="http://127.0.0.1:5000/todo/siddythings"target="_blank">http://127.0.0.1:5000/todo/siddythings</a></p>
+<h3 id="wrapping-up">Wrapping up</h3>
+<p>In this segment we have learn about seting up the database.</p>
+<p>Try to do some project by yourself.</p>
+<p>In the upcoming segment we are learing about showing querying the records.</p>
+<h5 id="if-you-stuck-someware-checkout-my-code">If you stuck someware checkout my code</h5>
+<p><a href="https://github.com/Apex1000/flask-blog"target="_blank">Github</a></p>
+<h5 id="still-need-any-help-just-dm">Still need any help! Just DM</h5>
+<p><a href="https://www.instagram.com/siddythings/"target="_blank">Instagarm</a></p></article><section class="article labels"><a class="category" href=/categories/flask/>Flask</a><a class="category" href=/categories/flask-beginner/>Flask Beginner</a><a class="tag" href=/tags/python/>python</a><a class="tag" href=/tags/flask/>Flask</a><a class="tag" href=/tags/web-development/>web development</a></section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/flask-configuration-files/"><span class="iconfont icon-article"></span>Flask configuration files | Ep. 09</a></p></section></div></section><section id="footer"><div style="display:flex; flex-direction:row; flex-wrap:wrap; justify-content:center;">
+    <p style=" flex-shrink: 0;">©2020 siddythings.</p>
+</div></section></body>
+
+</html>

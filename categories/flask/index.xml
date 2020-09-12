@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>©2020 siddythings.</copyright>
-    <lastBuildDate>Tue, 08 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 09 Sep 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="/categories/flask/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Flask Database with Flask-SQLAlchemy  | Ep. 10</title>
+      <link>/post/flask-database-config/</link>
+      <pubDate>Wed, 09 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/flask-database-config/</guid>
+      <description>&lt;p&gt;Hello,&lt;/p&gt;
+&lt;p&gt;In this segment, we are going to look at how to interact with the database in the flask.&lt;/p&gt;</description>
+      
+    </item>
     
     <item>
       <title>Flask configuration files | Ep. 09</title>

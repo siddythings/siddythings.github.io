@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>©2020 siddythings.</copyright>
-    <lastBuildDate>Wed, 09 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 10 Sep 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="/tags/flask/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Flask Database Query  | Ep. 11</title>
+      <link>/post/flask-database-query/</link>
+      <pubDate>Thu, 10 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/flask-database-query/</guid>
+      <description>&lt;p&gt;Hi,
+In this segment, we are learning about displaying the records and Querying our data.&lt;/p&gt;</description>
+      
+    </item>
     
     <item>
       <title>Flask Database with Flask-SQLAlchemy  | Ep. 10</title>

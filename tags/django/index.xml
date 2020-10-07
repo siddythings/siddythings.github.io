@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Django on Siddythings</title>
+    <link>/tags/django/</link>
+    <description>Recent content in Django on Siddythings</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>©2020 siddythings.</copyright>
+    <lastBuildDate>Fri, 02 Oct 2020 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="/tags/django/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Your First Django Application | Ep. 01</title>
+      <link>/post/first-django-application/</link>
+      <pubDate>Fri, 02 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/first-django-application/</guid>
+      <description>&lt;p&gt;In this part, you will be creating a simple REST application with minimum requirements.
+We’re going to use a virtual environment throughout this series of learning.&lt;/p&gt;</description>
+      
+    </item>
+    
+  </channel>
+</rss>

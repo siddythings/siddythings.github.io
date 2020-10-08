@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.74.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+
+<meta name="twitter:description" content="Django, API, REST,Serialization - Django REST framework">
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:domain" content="siddythings.github.io" />
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="siddythings" />
+
+<link rel="shortcut icon" href="/img/favicon.ico"><title>Serialization - Django REST framework| Ep. 02&nbsp;&ndash;&nbsp;Siddythings</title><link rel="stylesheet" href="/css/core.min.35c2fe648c6da825f8b00570c3daac0f128c5c86ec631edcf2c847afb817ea48b4772d6fb7c02379afbaa728c401e788.css" integrity="sha384-NcL&#43;ZIxtqCX4sAVww9qsDxKMXIbsYx7c8shHr7gX6ki0dy1vt8Ajea&#43;6pyjEAeeI"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Serialization - Django REST framework| Ep. 02" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><img class="site logo" src="/img/logo.png" alt /><span class="site name">Siddythings</span></a></span>
+        <span class="header right-side"><div class="nav wrap">
+    <nav class="nav">
+        <a class="nav item" href="/"><span class="iconfont icon-user"></span>&nbsp;Posts</a><a class="nav item " href="/categories/">Categories</a><a class="nav item" href="/tags/"><i data-icon="&#x21dd;"></i> Tags</a><a class="nav item" href="/about/"><span class="iconfont icon-user"></span>&nbsp;About</a>
+        <a class="nav item" href="https://github.com/apex1000" target="_blank"><span
+                class="iconfont icon-github"></span>&nbsp;Github</a>
+    </nav>
+</div></span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Serialization - Django REST framework| Ep. 02</h1><p class="article date">October 3</p></section><article class="article markdown-body"><p>In this tutorial, we&rsquo;ll be covering creating a simple Web API.</p>
+<p>Along the way, it will introduce the various components that make up the REST framework and give you a comprehensive understanding of how everything fits together.</p>
+<h3 id="introduction">Introduction</h3>
+<p>Serializers are responsible for converting python objects into data types understandable by front-end frameworks and vice versa.</p>
+<h4 id="getting-started">Getting started</h4>
+<p>Let&rsquo;s start coding. To get started, let&rsquo;s create a new project.</p>
+<pre><code>django-admin startproject djserializers
+cd djserializers
+</code></pre><p>Now create an app</p>
+<pre><code>python manage.py startapp todo
+</code></pre><p>We&rsquo;ll need to app your app to your <code>INSTALLED_APPS</code>.
+Open <code>djserializers/settings.py</code></p>
+<pre><code>INSTALLED_APPS = [
+    ...
+    'rest_framework',
+    'todo',
+]
+</code></pre><h4 id="creating-a-model-for-todo-app">Creating a <code>model</code> for <code>todo</code> app</h4>
+<p>Let&rsquo;s create a model for out todo app by creating a simple <code>Todos</code> model that is used to store todos.</p>
+<p>Open <code>todo/models.py</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+
+<span class="c1"># Create your models here.</span>
+<span class="k">class</span> <span class="nc">Todos</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">created</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">auto_now_add</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">ordering</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;created&#39;</span><span class="p">]</span>
+</code></pre></div><p>We&rsquo;ll also create an <code>migration</code> for our todo model, and <code>sync</code> the database.</p>
+<pre><code>python manage.py makemigrations snippets
+python manage.py migrate
+</code></pre><h4 id="creating-a-serializer-class">Creating a Serializer class</h4>
+<p>Web API is to provide a way of serializing and deserializing the todo instances into representations such as <code>JSON</code></p>
+<p>Create a file in the todo folder named <code>serializers.py</code> and add the following.</p>
+<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="kn">from</span> <span class="nn">rest_framework</span> <span class="kn">import</span> <span class="n">serializers</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Todos</span>
+
+<span class="k">class</span> <span class="nc">TodoSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">Serializer</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">(</span><span class="n">read_only</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">allow_black</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;base_template&#39;</span><span class="p">:</span> <span class="s1">&#39;textarea.html&#39;</span><span class="p">})</span>
+
+    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">validated_data</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">        Create and return a new `Todos` instance, given the validated data.
+</span><span class="s2">        &#34;&#34;&#34;</span>
+        <span class="k">return</span> <span class="n">Todos</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="o">**</span><span class="n">validated_data</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">validated_data</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">        Update and return an existing `Todos` instance, given the validated data.
+</span><span class="s2">        &#34;&#34;&#34;</span>
+        <span class="n">instance</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">validated_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="n">instance</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
+        <span class="n">instance</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="n">validated_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="n">instance</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+        <span class="n">instance</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">instance</span>
+</code></pre></div><p>A serializer class is very similar to a <code>Django Form</code> class, and includes similar validation flags on the various <code>fields</code>, such as <code>required</code>, <code>max_length</code> and <code>default</code>.</p>
+<h4 id="writing-regular-django-views">Writing regular Django views</h4>
+<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span>
+<span class="c1"># Create your views here.</span>
+<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponse</span><span class="p">,</span> <span class="n">JsonResponse</span>
+<span class="kn">from</span> <span class="nn">django.views.decorators.csrf</span> <span class="kn">import</span> <span class="n">csrf_exempt</span>
+<span class="kn">from</span> <span class="nn">rest_framework.parsers</span> <span class="kn">import</span> <span class="n">JSONParser</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Todos</span>
+<span class="kn">from</span> <span class="nn">.serializers</span> <span class="kn">import</span> <span class="n">TodoSerializer</span>
+
+<span class="nd">@csrf_exempt</span>
+<span class="k">def</span> <span class="nf">todos_list</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;GET&#39;</span><span class="p">:</span>
+        <span class="n">todo</span> <span class="o">=</span> <span class="n">Todos</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+        <span class="n">serializer</span> <span class="o">=</span> <span class="n">TodoSerializer</span><span class="p">(</span><span class="n">todo</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">(</span><span class="n">serializer</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">safe</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">JSONParser</span><span class="p">()</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="n">serializer</span> <span class="o">=</span> <span class="n">TodoSerializer</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">serializer</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="n">serializer</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">(</span><span class="n">serializer</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">201</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">(</span><span class="n">serializer</span><span class="o">.</span><span class="n">errors</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+
+
+<span class="nd">@csrf_exempt</span>
+<span class="k">def</span> <span class="nf">todo_detail</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">todo</span> <span class="o">=</span> <span class="n">Todos</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">Todos</span><span class="o">.</span><span class="n">DoesNotExist</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="mi">404</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;GET&#39;</span><span class="p">:</span>
+        <span class="n">serializer</span> <span class="o">=</span> <span class="n">TodoSerializer</span><span class="p">(</span><span class="n">todo</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">(</span><span class="n">serializer</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;PUT&#39;</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">JSONParser</span><span class="p">()</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="n">serializer</span> <span class="o">=</span> <span class="n">TodoSerializer</span><span class="p">(</span><span class="n">todo</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">serializer</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="n">serializer</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">(</span><span class="n">serializer</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">(</span><span class="n">serializer</span><span class="o">.</span><span class="n">errors</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;DELETE&#39;</span><span class="p">:</span>
+        <span class="n">todo</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="mi">204</span><span class="p">)</span>
+</code></pre></div><p>Then we need to bind these views. Create a file <code>urls.py</code> in <code>todo</code> folder</p>
+<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">path</span>
+<span class="kn">from</span> <span class="nn">todo</span> <span class="kn">import</span> <span class="n">views</span>
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;todo/&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">todos_list</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;todo/&lt;int:id&gt;&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">todo_detail</span><span class="p">),</span>
+
+<span class="p">]</span>
+</code></pre></div><p>Now bind app <code>urls.py</code> to site <code>urls.py</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">path</span><span class="p">,</span> <span class="n">include</span>
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;admin/&#39;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">include</span><span class="p">(</span><span class="s1">&#39;todo.urls&#39;</span><span class="p">)),</span>
+<span class="p">]</span>
+</code></pre></div><h4 id="testing-web-api">Testing Web API</h4>
+<p>Startup Django&rsquo;s development server.</p>
+<div class="highlight"><pre class="chroma"><code class="language-s" data-lang="s"><span class="n">python</span> <span class="n">manage.py</span> <span class="n">runserver</span>
+
+<span class="n">Validating</span> <span class="n">models...</span>
+
+<span class="n">System</span> <span class="n">check</span> <span class="n">identified</span> <span class="n">no</span> <span class="nf">issues </span><span class="p">(</span><span class="m">0</span> <span class="n">silenced</span><span class="p">)</span><span class="n">.
+</span><span class="n">October</span> <span class="m">07</span><span class="p">,</span> <span class="m">2020</span> <span class="o">-</span> <span class="m">07</span><span class="o">:</span><span class="m">22</span><span class="o">:</span><span class="m">22</span>
+<span class="n">Django</span> <span class="n">version</span> <span class="m">3.1.2</span><span class="p">,</span> <span class="n">using</span> <span class="n">settings</span> <span class="s">&#39;djserializers.settings&#39;</span>
+<span class="n">Starting</span> <span class="n">development</span> <span class="n">server</span> <span class="n">at</span> <span class="n">http</span><span class="o">://</span><span class="m">127.0.0.1</span><span class="o">:</span><span class="m">8000</span><span class="o">/</span>
+<span class="n">Quit</span> <span class="n">the</span> <span class="n">server</span> <span class="n">with</span> <span class="n">CONTROL</span><span class="o">-</span><span class="n">C.</span>
+</code></pre></div><p>Finally, we can get a list of all of the todos:</p>
+<div class="highlight"><pre class="chroma"><code class="language-s" data-lang="s"><span class="n">curl</span> <span class="n">http</span><span class="o">://</span><span class="m">127.0.0.1</span><span class="o">:</span><span class="m">8000</span><span class="o">/</span><span class="n">todo</span><span class="o">/</span>
+<span class="n">[</span>
+<span class="p">{</span>
+<span class="s">&#34;id&#34;</span><span class="o">:</span> <span class="m">1</span><span class="p">,</span>
+ <span class="s">&#34;title&#34;</span><span class="o">:</span> <span class="s">&#34;Homework&#34;</span><span class="p">,</span>
+ <span class="s">&#34;content&#34;</span><span class="o">:</span> <span class="s">&#34;Do Homework&#34;</span>
+<span class="p">}</span>
+<span class="p">{</span>
+<span class="s">&#34;id&#34;</span><span class="o">:</span> <span class="m">2</span><span class="p">,</span>
+ <span class="s">&#34;title&#34;</span><span class="o">:</span> <span class="s">&#34;Food&#34;</span><span class="p">,</span>
+ <span class="s">&#34;content&#34;</span><span class="o">:</span> <span class="s">&#34;Do shoping&#34;</span>
+<span class="p">}</span>
+<span class="n">]</span>
+</code></pre></div><p>Or we can get a particular todo by referencing its id:</p>
+<div class="highlight"><pre class="chroma"><code class="language-s" data-lang="s"><span class="n">curl</span> <span class="n">http</span><span class="o">://</span><span class="m">127.0.0.1</span><span class="o">:</span><span class="m">8000</span><span class="o">/</span><span class="n">todo</span><span class="o">/</span><span class="m">1</span>
+<span class="n">[</span>
+<span class="p">{</span>
+<span class="s">&#34;id&#34;</span><span class="o">:</span> <span class="m">1</span><span class="p">,</span>
+ <span class="s">&#34;title&#34;</span><span class="o">:</span> <span class="s">&#34;Homework&#34;</span><span class="p">,</span>
+ <span class="s">&#34;content&#34;</span><span class="o">:</span> <span class="s">&#34;Do Homework&#34;</span>
+<span class="p">}</span>
+<span class="n">]</span>
+</code></pre></div><h3 id="wrapping-up">Wrapping Up</h3>
+<p>We&rsquo;re doing okay so far,we&rsquo;ve got a serialization API that feels pretty similar to Django&rsquo;s Forms API, and some regular Django views.</p>
+<p>For more details <a href="https://www.django-rest-framework.org/tutorial/1-serialization/"target="_blank">Django REST</a></p>
+<h5 id="if-you-stuck-someware-checkout-my-code">If you stuck someware checkout my code</h5>
+<p><a href="https://github.com/Apex1000/django-blogs"target="_blank">Github</a></p>
+<h5 id="still-need-any-help-just-dm">Still need any help! Just DM</h5>
+<p><a href="https://www.instagram.com/siddythings/"target="_blank">Instagarm</a></p></article><section class="article labels"><a class="category" href=/categories/django/>Django</a><a class="category" href=/categories/django-beginner/>Django Beginner</a><a class="tag" href=/tags/python/>python</a><a class="tag" href=/tags/django/>Django</a><a class="tag" href=/tags/web-development/>web development</a></section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/post/first-django-application/"><span class="iconfont icon-article"></span>Your First Django Application | Ep. 01</a></p></section></div></section><section id="footer"><div style="display:flex; flex-direction:row; flex-wrap:wrap; justify-content:center;">
+    <p style=" flex-shrink: 0;">©2020 siddythings.</p>
+</div></section></body>
+
+</html>

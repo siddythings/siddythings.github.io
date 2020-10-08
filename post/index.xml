@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>©2020 siddythings.</copyright>
-    <lastBuildDate>Fri, 02 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 03 Oct 2020 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Serialization - Django REST framework| Ep. 02</title>
+      <link>/post/django-serialization/</link>
+      <pubDate>Sat, 03 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/django-serialization/</guid>
+      <description>&lt;p&gt;In this tutorial, we&amp;rsquo;ll be covering creating a simple Web API.&lt;/p&gt;
+&lt;p&gt;Along the way, it will introduce the various components that make up the REST framework and give you a comprehensive understanding of how everything fits together.&lt;/p&gt;</description>
+      
+    </item>
     
     <item>
       <title>Your First Django Application | Ep. 01</title>

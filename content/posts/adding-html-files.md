@@ -1,20 +1,20 @@
-+++
-author = "Sidhart"
-title = "Adding HTML files | Ep. 03"
-date = "2020-09-04"
-description = "In this part will take care of your HTML files"
-tags = [
+---
+author : "Sidhart"
+title : "Adding HTML files | Ep. 03"
+date : "2020-09-04"
+description : "In this part will take care of your HTML files"
+tags : [
     "python",
     "Flask",
     "web development",
 ]
-categories = [
+categories : [
     "Flask",
     "Flask Beginner",
 ]
-series = ["Flask Learing Guide"]
-aliases = ["flask-learing-guide"]
-+++
+# series : ["Flask Learing Guide"]
+aliases : ["flask-learing-guide"]
+---
 
 Hello Guys
 in this part, we are going to bind our application with an HTML page.

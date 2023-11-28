@@ -1,20 +1,20 @@
-+++
-author = "Sidhart"
-title = "Creating forms with Flask | Ep. 07"
-date = "2020-09-06"
-description = "Creating forms, posting data to views and working with form data in Flask"
-tags = [
+---
+author : "Sidhart"
+title : "Creating forms with Flask | Ep. 07"
+date : "2020-09-06"
+description : "Creating forms, posting data to views and working with form data in Flask"
+tags : [
     "python",
     "Flask",
     "web development",
 ]
-categories = [
+categories : [
     "Flask",
     "Flask Beginner",
 ]
-series = ["Flask Learing Guide"]
-aliases = ["flask-learing-guide"]
-+++
+# series : ["Flask Learing Guide"]
+aliases : ["flask-learing-guide"]
+---
 
 Hello,
 In this segment, we are going to talk about Forms.

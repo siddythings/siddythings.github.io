@@ -1,20 +1,20 @@
-+++
-author = "Sidhart"
-title = "Adding static files Flask | Ep. 04"
-date = "2020-09-04"
-description = "In this part will adding static files in flask application"
-tags = [
+---
+author : "Sidhart"
+title : "Adding static files Flask | Ep. 04"
+date : "2020-09-04"
+description : "In this part will adding static files in flask application"
+tags : [
     "python",
     "Flask",
     "web development",
 ]
-categories = [
+categories : [
     "Flask",
     "Flask Beginner",
 ]
-series = ["Flask Learing Guide"]
-aliases = ["flask-learing-guide"]
-+++
+# series : ["Flask Learing Guide"]
+aliases : ["flask-learing-guide"]
+---
 
 Hii, 
 In this segment, we are learning about how to add ```stylesheets```, ```javascript```, and ```images``` to our application.

@@ -1,20 +1,20 @@
-+++
-author = "Sidhart"
-title = "Your First Django Application | Ep. 01"
-date = "2020-10-02"
-description = "In first episode of learing we are trying to create and run very first Django Applaction"
-tags = [
+---
+author : "Sidhart"
+title : "Your First Django Application | Ep. 01"
+date : "2020-10-02"
+description : "In first episode of learing we are trying to create and run very first Django Applaction"
+tags : [
     "python",
     "Django",
     "web development",
 ]
-categories = [
+categories : [
     "Django",
     "Django Beginner",
 ]
-series = ["Django Learing Guide"]
-aliases = ["django-learing-guide"]
-+++
+# series : ["Django Learing Guide"]
+aliases : ["django-learing-guide"]
+---
 
 
 In this part, you will be creating a simple REST application with minimum requirements.

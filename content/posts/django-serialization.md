@@ -1,20 +1,20 @@
-+++
-author = "Sidhart"
-title = "Serialization - Django REST framework| Ep. 02"
-date = "2020-10-03"
-description = "Django, API, REST,Serialization - Django REST framework"
-tags = [
+---
+author : "Sidhart"
+title : "Serialization - Django REST framework| Ep. 02"
+date : "2020-10-03"
+description : "Django, API, REST,Serialization - Django REST framework"
+tags : [
     "python",
     "Django",
     "web development",
 ]
-categories = [
+categories : [
     "Django",
     "Django Beginner",
 ]
-series = ["Django Learing Guide"]
-aliases = ["django-learing-guide"]
-+++
+# series : ["Django Learing Guide"]
+aliases : ["django-learing-guide"]
+---
 
 
 In this tutorial, we'll be covering creating a simple Web API. 

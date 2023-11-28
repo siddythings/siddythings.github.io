@@ -1,20 +1,20 @@
-+++
-author = "Sidhart"
-title = "Dynamic URLs with Flask | Ep. 08"
-date = "2020-09-07"
-description = "Learn how to link nevbar and create and work with dynamic URLs and dynamic data in Flask"
-tags = [
+---
+author : "Sidhart"
+title : "Dynamic URLs with Flask | Ep. 08"
+date : "2020-09-07"
+description : "Learn how to link nevbar and create and work with dynamic URLs and dynamic data in Flask"
+tags : [
     "python",
     "Flask",
     "web development",
 ]
-categories = [
+categories : [
     "Flask",
     "Flask Beginner",
 ]
-series = ["Flask Learing Guide"]
-aliases = ["flask-learing-guide"]
-+++
+# series : ["Flask Learing Guide"]
+aliases : ["flask-learing-guide"]
+---
 
 Hii, 
 In this segment, we are learning about mapping routes to a navbar and create dynamic URLs.

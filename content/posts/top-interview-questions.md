@@ -1,19 +1,19 @@
-+++
-author = "Sidhart"
-title = "Top Interview Questions"
-date = "2020-09-03"
-description = "In first episode of learing we are trying to create and run very first Flask Applaction"
-tags = [
+---
+author : "Sidhart"
+title : "Top Interview Questions"
+date : "2020-09-03"
+description : "In first episode of learing we are trying to create and run very first Flask Applaction"
+tags : [
     "interview",
     "coding",
     "array"
 ]
-categories = [
+categories : [
     "Interview",
 ]
-series = ["Flask Learing Guide"]
-aliases = ["flask-learing-guide"]
-+++
+# series : ["Flask Learing Guide"]
+aliases : ["flask-learing-guide"]
+---
 
 
 Hii, I know your preparing for your interview, So here I m to help you to list down some of the most common questions asked in the interview.

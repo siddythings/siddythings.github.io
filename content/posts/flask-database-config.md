@@ -1,20 +1,20 @@
-+++
-author = "Sidhart"
-title = "Flask Database with Flask-SQLAlchemy  | Ep. 10"
-date = "2020-09-09"
-description = "Connect Flask to a Database with Flask-SQLAlchemy"
-tags = [
+---
+author : "Sidhart"
+title : "Flask Database with Flask-SQLAlchemy  | Ep. 10"
+date : "2020-09-09"
+description : "Connect Flask to a Database with Flask-SQLAlchemy"
+tags : [
     "python",
     "Flask",
     "web development",
 ]
-categories = [
+categories : [
     "Flask",
     "Flask Beginner",
 ]
-series = ["Flask Learing Guide"]
-aliases = ["flask-learing-guide"]
-+++
+# series : ["Flask Learing Guide"]
+aliases : ["flask-learing-guide"]
+---
 
 Hello, 
 

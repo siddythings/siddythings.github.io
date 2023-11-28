@@ -1,7 +1,7 @@
 ---
 author : "Sidhart"
 title : "Your First Django Application | Ep. 01"
-date : "2020-10-02"
+# date : "2020-10-02"
 description : "In first episode of learing we are trying to create and run very first Django Applaction"
 tags : [
     "python",

@@ -1,7 +1,7 @@
 ---
 author : "Sidhart"
 title : "Top Interview Questions"
-date : "2020-09-03"
+# date : "2020-09-03"
 description : "In first episode of learing we are trying to create and run very first Flask Applaction"
 tags : [
     "interview",

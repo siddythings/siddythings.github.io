@@ -1,7 +1,7 @@
 ---
 author : "Sidhart"
 title : "Creating forms with Flask | Ep. 07"
-date : "2020-09-06"
+# date : "2020-09-06"
 description : "Creating forms, posting data to views and working with form data in Flask"
 tags : [
     "python",

@@ -1,7 +1,7 @@
 ---
 author : "Sidhart"
 title : "Flask application structure | Ep. 02"
-date : "2020-09-03"
+# date : "2020-09-03"
 description : "In this part well looking at structure of your application"
 tags : [
     "python",

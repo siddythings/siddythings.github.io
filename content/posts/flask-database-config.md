@@ -1,7 +1,7 @@
 ---
 author : "Sidhart"
 title : "Flask Database with Flask-SQLAlchemy  | Ep. 10"
-date : "2020-09-09"
+# date : "2020-09-09"
 description : "Connect Flask to a Database with Flask-SQLAlchemy"
 tags : [
     "python",

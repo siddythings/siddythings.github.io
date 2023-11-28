@@ -1,7 +1,7 @@
 ---
 author : "Sidhart"
 title : "Adding static files Flask | Ep. 04"
-date : "2020-09-04"
+# date : "2020-09-04"
 description : "In this part will adding static files in flask application"
 tags : [
     "python",

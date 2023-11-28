@@ -1,7 +1,7 @@
 ---
 author : "Sidhart"
 title : "Dynamic URLs with Flask | Ep. 08"
-date : "2020-09-07"
+# date : "2020-09-07"
 description : "Learn how to link nevbar and create and work with dynamic URLs and dynamic data in Flask"
 tags : [
     "python",

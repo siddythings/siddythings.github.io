@@ -1,7 +1,7 @@
 ---
 author : "Sidhart"
 title : "Adding HTML files | Ep. 03"
-date : "2020-09-04"
+# date : "2020-09-04"
 description : "In this part will take care of your HTML files"
 tags : [
     "python",

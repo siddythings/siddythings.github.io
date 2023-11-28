@@ -1,7 +1,7 @@
 ---
 author : "Sidhart"
 title : "Query strings in Flask  | Ep. 12"
-date : "2020-09-11"
+# date : "2020-09-11"
 description : "Creating and working with query string data in Flask"
 tags : [
     "python",

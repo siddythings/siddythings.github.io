@@ -1,7 +1,7 @@
 ---
 author : "Sidhart"
 title : "Flask configuration files | Ep. 09"
-date : "2020-09-08"
+# date : "2020-09-08"
 description : "Configuring Flask applications using a config file"
 tags : [
     "python",

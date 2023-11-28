@@ -1,7 +1,7 @@
 ---
 author : "Sidhart"
 title : "Serialization - Django REST framework| Ep. 02"
-date : "2020-10-03"
+# date : "2020-10-03"
 description : "Django, API, REST,Serialization - Django REST framework"
 tags : [
     "python",

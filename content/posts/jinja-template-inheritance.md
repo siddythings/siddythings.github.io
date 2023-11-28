@@ -1,7 +1,7 @@
 ---
 author : "Sidhart"
 title : "Jinja Templating Flask | Ep. 05"
-date : "2020-09-04"
+# date : "2020-09-04"
 description : "Jinja Templating in Flask"
 tags : [
     "python",

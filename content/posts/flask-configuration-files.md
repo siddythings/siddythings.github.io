@@ -1,20 +1,20 @@
-+++
-author = "Sidhart"
-title = "Flask configuration files | Ep. 09"
-date = "2020-09-08"
-description = "Configuring Flask applications using a config file"
-tags = [
+---
+author : "Sidhart"
+title : "Flask configuration files | Ep. 09"
+# date : "2020-09-08"
+description : "Configuring Flask applications using a config file"
+tags : [
     "python",
     "Flask",
     "web development",
 ]
-categories = [
+categories : [
     "Flask",
     "Flask Beginner",
 ]
-series = ["Flask Learing Guide"]
-aliases = ["flask-learing-guide"]
-+++
+# series : ["Flask Learing Guide"]
+aliases : ["flask-learing-guide"]
+---
 
 Hello,
 

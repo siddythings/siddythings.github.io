@@ -1,20 +1,20 @@
-+++
-author = "Sidhart"
-title = "Flask Database Query  | Ep. 11"
-date = "2020-09-10"
-description = "Connect Flask to a Database with Flask-SQLAlchemy and Database Query"
-tags = [
+---
+author : "Sidhart"
+title : "Flask Database Query  | Ep. 11"
+# date : "2020-09-10"
+description : "Connect Flask to a Database with Flask-SQLAlchemy and Database Query"
+tags : [
     "python",
     "Flask",
     "web development",
 ]
-categories = [
+categories : [
     "Flask",
     "Flask Beginner",
 ]
-series = ["Flask Learing Guide"]
-aliases = ["flask-learing-guide"]
-+++
+# series : ["Flask Learing Guide"]
+aliases : ["flask-learing-guide"]
+---
 
 Hi,
 In this segment, we are learning about displaying the records and Querying our data.

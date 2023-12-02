@@ -1,20 +1,20 @@
-+++
-author = "Sidhart"
-title = "Jinja Templating Flask Part-02 | Ep. 06"
-date = "2020-09-06"
-description = "Jinja Templating in Flask"
-tags = [
+---
+author : "Sidhart"
+title : "Jinja Templating Flask Part-02 | Ep. 06"
+# date : "2020-09-06"
+description : "Jinja Templating in Flask"
+tags : [
     "python",
     "Flask",
     "web development",
 ]
-categories = [
+categories : [
     "Flask",
     "Flask Beginner",
 ]
-series = ["Flask Learing Guide"]
-aliases = ["flask-learing-guide"]
-+++
+# series : ["Flask Learing Guide"]
+aliases : ["flask-learing-guide"]
+---
 
 Hello,
 This segment is going to a bit more about Jinja templating. 

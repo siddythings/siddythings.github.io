@@ -1,20 +1,20 @@
-+++
-author = "Sidhart"
-title = "Flask application structure | Ep. 02"
-date = "2020-09-03"
-description = "In this part well looking at structure of your application"
-tags = [
+---
+author : "Sidhart"
+title : "Flask application structure | Ep. 02"
+# date : "2020-09-03"
+description : "In this part well looking at structure of your application"
+tags : [
     "python",
     "Flask",
     "web development",
 ]
-categories = [
+categories : [
     "Flask",
     "Flask Beginner",
 ]
-series = ["Flask Learing Guide"]
-aliases = ["flask-learing-guide"]
-+++
+# series : ["Flask Learing Guide"]
+aliases : ["flask-learing-guide"]
+---
 
 
 This part is about how to structure your application and create new routes. You'll learn about the different structure of your application.  

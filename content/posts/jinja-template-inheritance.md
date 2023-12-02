@@ -1,20 +1,20 @@
-+++
-author = "Sidhart"
-title = "Jinja Templating Flask | Ep. 05"
-date = "2020-09-04"
-description = "Jinja Templating in Flask"
-tags = [
+---
+author : "Sidhart"
+title : "Jinja Templating Flask | Ep. 05"
+# date : "2020-09-04"
+description : "Jinja Templating in Flask"
+tags : [
     "python",
     "Flask",
     "web development",
 ]
-categories = [
+categories : [
     "Flask",
     "Flask Beginner",
 ]
-series = ["Flask Learing Guide"]
-aliases = ["flask-learing-guide"]
-+++
+# series : ["Flask Learing Guide"]
+aliases : ["flask-learing-guide"]
+---
 
 Hello,
 In the last segment, we talk a bit about ```Jinja templating```. So in this segment, we are going to learn about How to work with ```Jinja templating``` engine with Html.

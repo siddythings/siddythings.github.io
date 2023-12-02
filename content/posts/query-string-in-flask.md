@@ -1,20 +1,20 @@
-+++
-author = "Sidhart"
-title = "Query strings in Flask  | Ep. 12"
-date = "2020-09-11"
-description = "Creating and working with query string data in Flask"
-tags = [
+---
+author : "Sidhart"
+title : "Query strings in Flask  | Ep. 12"
+# date : "2020-09-11"
+description : "Creating and working with query string data in Flask"
+tags : [
     "python",
     "Flask",
     "web development",
 ]
-categories = [
+categories : [
     "Flask",
     "Flask Beginner",
 ]
-series = ["Flask Learing Guide"]
-aliases = ["flask-learing-guide"]
-+++
+# series : ["Flask Learing Guide"]
+aliases : ["flask-learing-guide"]
+---
 
 Hello, 
 

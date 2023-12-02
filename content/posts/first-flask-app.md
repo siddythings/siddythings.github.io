@@ -1,20 +1,20 @@
-+++
-author = "Sidhart"
-title = "Your First Flask Applaction | Ep. 01"
-date = "2020-09-02"
-description = "In first episode of learing we are trying to create and run very first Flask Applaction"
-tags = [
+---
+author : "Sidhart"
+title : "Your First Flask Applaction | Ep. 01"
+# date : "2020-09-02"
+description : "In first episode of learing we are trying to create and run very first Flask Applaction"
+tags : [
     "python",
     "Flask",
     "web development",
 ]
-categories = [
+categories : [
     "Flask",
     "Flask Beginner",
 ]
-series = ["Flask Learing Guide"]
-aliases = ["flask-learing-guide"]
-+++
+# series : ["Flask Learing Guide"]
+aliases : ["flask-learing-guide"]
+---
 
 
 

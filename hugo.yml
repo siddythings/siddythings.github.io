@@ -83,6 +83,8 @@ params:
       url: "https://github.com/siddythings"
     - name: linkedin
       url: "https://linkedin.com/in/siddythings"
+    - name: email
+      url: "mailto:siddythings@gmail.com"
 
   analytics:
     google:

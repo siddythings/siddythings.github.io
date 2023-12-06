@@ -85,6 +85,8 @@ params:
       url: "https://linkedin.com/in/siddythings"
     - name: email
       url: "mailto:siddythings@gmail.com"
+    - name: rss
+      url: "blogs/index.xml"
 
   analytics:
     google:
@@ -118,7 +120,7 @@ menu:
   main:
     - identifier: blogs
       name: blogs
-      url: /posts/
+      url: /blogs/
       weight: 10
     - identifier: about
       name: about

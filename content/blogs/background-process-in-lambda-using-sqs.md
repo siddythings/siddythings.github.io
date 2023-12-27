@@ -13,7 +13,7 @@ categories : [
     "AWS",
     "SQS",
 ]
-weight: 1
+weight: 100
 # series : ["Flask Learing Guide"]
 # aliases : ["flask-learing-guide"]
 cover:

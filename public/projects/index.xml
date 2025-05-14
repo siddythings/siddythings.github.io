@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Projects on siddythings</title>
+    <link>http://localhost:1313/projects/</link>
+    <description>Recent content in Projects on siddythings</description>
+    <image>
+      <title>siddythings</title>
+      <url>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language><atom:link href="http://localhost:1313/projects/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Background Tasks in Lambda Using SQS</title>
+      <link>http://localhost:1313/projects/background-process-in-lambda-using-sqs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/projects/background-process-in-lambda-using-sqs/</guid>
+      <description>In the world of serverless computing, &lt;code&gt;AWS Lambda&lt;/code&gt; has become a popular choice for executing code without the need for provisioning or managing servers. One of the key features of AWS Lambda is its ability to run functions in response to various events.</description>
+    </item>
+    
+  </channel>
+</rss>

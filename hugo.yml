@@ -119,6 +119,14 @@ params:
 
 menu:
   main:
+    - identifier: projects
+      name: projects
+      url: /projects/
+      weight: 20
+    - identifier: ai-agents
+      name: ai-agents
+      url: /ai-agents/
+      weight: 20
     - identifier: blogs
       name: blogs
       url: /blogs/

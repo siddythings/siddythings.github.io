@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Blogs on siddythings</title>
+    <link>http://localhost:1313/blogs/</link>
+    <description>Recent content in Blogs on siddythings</description>
+    <image>
+      <title>siddythings</title>
+      <url>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language><atom:link href="http://localhost:1313/blogs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>What is a Dead Letter Queue (DLQ)?</title>
+      <link>http://localhost:1313/blogs/what-is-dead-letter-queue/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blogs/what-is-dead-letter-queue/</guid>
+      <description>A Dead-Letter Queue (DLQ) is like a message timeout corner in a software system.</description>
+    </item>
+    
+    <item>
+      <title>Background Tasks in Lambda Using SQS</title>
+      <link>http://localhost:1313/blogs/background-process-in-lambda-using-sqs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blogs/background-process-in-lambda-using-sqs/</guid>
+      <description>In the world of serverless computing, &lt;code&gt;AWS Lambda&lt;/code&gt; has become a popular choice for executing code without the need for provisioning or managing servers. One of the key features of AWS Lambda is its ability to run functions in response to various events.</description>
+    </item>
+    
+    <item>
+      <title>Adding HTML files | Ep. 03</title>
+      <link>http://localhost:1313/blogs/adding-html-files/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blogs/adding-html-files/</guid>
+      <description>In this part will take care of your HTML files</description>
+    </item>
+    
+    <item>
+      <title>Adding static files Flask | Ep. 04</title>
+      <link>http://localhost:1313/blogs/adding-static-folder-flask/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blogs/adding-static-folder-flask/</guid>
+      <description>In this part will adding static files in flask application</description>
+    </item>
+    
+    <item>
+      <title>Creating forms with Flask | Ep. 07</title>
+      <link>http://localhost:1313/blogs/forms-in-flask/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blogs/forms-in-flask/</guid>
+      <description>Creating forms, posting data to views and working with form data in Flask</description>
+    </item>
+    
+    <item>
+      <title>Dynamic URLs with Flask | Ep. 08</title>
+      <link>http://localhost:1313/blogs/flask-dynamic-urls/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blogs/flask-dynamic-urls/</guid>
+      <description>Learn how to link nevbar and create and work with dynamic URLs and dynamic data in Flask</description>
+    </item>
+    
+    <item>
+      <title>Flask application structure | Ep. 02</title>
+      <link>http://localhost:1313/blogs/flask-application-structure/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blogs/flask-application-structure/</guid>
+      <description>In this part well looking at structure of your application</description>
+    </item>
+    
+    <item>
+      <title>Flask configuration files | Ep. 09</title>
+      <link>http://localhost:1313/blogs/flask-configuration-files/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blogs/flask-configuration-files/</guid>
+      <description>Configuring Flask applications using a config file</description>
+    </item>
+    
+    <item>
+      <title>Flask Database Query  | Ep. 11</title>
+      <link>http://localhost:1313/blogs/flask-database-query/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blogs/flask-database-query/</guid>
+      <description>Connect Flask to a Database with Flask-SQLAlchemy and Database Query</description>
+    </item>
+    
+    <item>
+      <title>Flask Database with Flask-SQLAlchemy  | Ep. 10</title>
+      <link>http://localhost:1313/blogs/flask-database-config/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blogs/flask-database-config/</guid>
+      <description>Connect Flask to a Database with Flask-SQLAlchemy</description>
+    </item>
+    
+    <item>
+      <title>Jinja Templating Flask | Ep. 05</title>
+      <link>http://localhost:1313/blogs/jinja-template-inheritance/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blogs/jinja-template-inheritance/</guid>
+      <description>Jinja Templating in Flask</description>
+    </item>
+    
+    <item>
+      <title>Jinja Templating Flask Part-02 | Ep. 06</title>
+      <link>http://localhost:1313/blogs/jinja-templating-part-02/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blogs/jinja-templating-part-02/</guid>
+      <description>Jinja Templating in Flask</description>
+    </item>
+    
+    <item>
+      <title>Query strings in Flask  | Ep. 12</title>
+      <link>http://localhost:1313/blogs/query-string-in-flask/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blogs/query-string-in-flask/</guid>
+      <description>Creating and working with query string data in Flask</description>
+    </item>
+    
+    <item>
+      <title>Serialization - Django REST framework| Ep. 02</title>
+      <link>http://localhost:1313/blogs/django-serialization/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blogs/django-serialization/</guid>
+      <description>Django, API, REST,Serialization - Django REST framework</description>
+    </item>
+    
+    <item>
+      <title>Top Interview Questions</title>
+      <link>http://localhost:1313/blogs/top-interview-questions/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blogs/top-interview-questions/</guid>
+      <description>In first episode of learing we are trying to create and run very first Flask Applaction</description>
+    </item>
+    
+    <item>
+      <title>Your First Django Application | Ep. 01</title>
+      <link>http://localhost:1313/blogs/first-django-application/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blogs/first-django-application/</guid>
+      <description>In first episode of learing we are trying to create and run very first Django Applaction</description>
+    </item>
+    
+    <item>
+      <title>Your First Flask Applaction | Ep. 01</title>
+      <link>http://localhost:1313/blogs/first-flask-app/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blogs/first-flask-app/</guid>
+      <description>In first episode of learing we are trying to create and run very first Flask Applaction</description>
+    </item>
+    
+  </channel>
+</rss>

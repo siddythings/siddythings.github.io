@@ -222,4 +222,3 @@ The implementation we've discussed demonstrates how to create a fully functional
 - [LlamaIndex Documentation](https://docs.llamaindex.ai/)
 - [Ollama Documentation](https://ollama.ai/docs)
 - [LightningAI Documentation](https://lightning.ai/docs)
-- [Model Context Protocol Specification](https://github.com/cursor-ai/mcp) 

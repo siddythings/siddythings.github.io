@@ -4,7 +4,11 @@
   <url>
     <loc>http://localhost:1313/blogs/what-is-dead-letter-queue/</loc>
   </url><url>
+    <loc>http://localhost:1313/ai-agents/background-process-in-lambda-using-sqs/</loc>
+  </url><url>
     <loc>http://localhost:1313/blogs/background-process-in-lambda-using-sqs/</loc>
+  </url><url>
+    <loc>http://localhost:1313/projects/background-process-in-lambda-using-sqs/</loc>
   </url><url>
     <loc>http://localhost:1313/education/</loc>
   </url><url>
@@ -13,6 +17,8 @@
     <loc>http://localhost:1313/blogs/adding-html-files/</loc>
   </url><url>
     <loc>http://localhost:1313/blogs/adding-static-folder-flask/</loc>
+  </url><url>
+    <loc>http://localhost:1313/ai-agents/</loc>
   </url><url>
     <loc>http://localhost:1313/tags/array/</loc>
   </url><url>
@@ -59,6 +65,8 @@
     <loc>http://localhost:1313/blogs/jinja-templating-part-02/</loc>
   </url><url>
     <loc>http://localhost:1313/tags/lambda/</loc>
+  </url><url>
+    <loc>http://localhost:1313/projects/</loc>
   </url><url>
     <loc>http://localhost:1313/tags/python/</loc>
   </url><url>

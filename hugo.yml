@@ -81,8 +81,8 @@ params:
       url: "http://x.com/siddythings"
     - name: github
       url: "https://github.com/siddythings"
-    - name: linkedin
-      url: "https://linkedin.com/in/siddythings"
+    # - name: linkedin
+    #   url: "https://linkedin.com/in/siddythings"
     - name: email
       url: "mailto:siddythings@gmail.com"
     - name: rss

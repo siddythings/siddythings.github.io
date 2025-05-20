@@ -36,6 +36,7 @@ The AI-Powered Cover Letter & Cold Email Generator is a modern web application t
 ### Backend Stack
 - **FastAPI**: High-performance Python web framework
 - **OpenAI API**: For AI-powered content generation
+- **Firecrawl API**: For job description crawl
 - **Python-docx**: For DOCX file processing
 - **PyPDF2**: For PDF file processing
 - **Requests**: For web scraping job descriptions
